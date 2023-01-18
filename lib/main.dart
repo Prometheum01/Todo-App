@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
 import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
+import 'package:todo_app/core/services/database/task_hive.dart';
 import 'package:todo_app/features/screens/task_list/view/task_list_view.dart';
 
-void main() {
+void main() async {
+  await TaskHive().initDB();
+
   runApp(const MyApp());
 }
 

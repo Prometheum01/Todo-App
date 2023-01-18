@@ -12,23 +12,25 @@ class TaskInitial extends TaskState {}
 class TaskLoading extends TaskState {}
 
 class TaskLoaded extends TaskState {
-  final List<Task> taskList;
+  final List<Task> waitingTaskList;
+  final List<Task> doneTaskList;
 
-  const TaskLoaded({required this.taskList});
+  const TaskLoaded({required this.waitingTaskList, required this.doneTaskList});
 
   @override
-  List<Object> props() => [taskList];
+  List<Object> props() => [waitingTaskList, doneTaskList];
 }
 
 class TaskSelection extends TaskState {
-  final List<Task> taskList;
+  final List<Task> waitingTaskList;
+  final List<Task> doneTaskList;
   final List<Task> selectedTaskList;
 
-  const TaskSelection({
-    required this.selectedTaskList,
-    required this.taskList,
-  });
+  const TaskSelection(
+      {required this.selectedTaskList,
+      required this.waitingTaskList,
+      required this.doneTaskList});
 
   @override
-  List<Object> props() => [taskList, selectedTaskList];
+  List<Object> props() => [waitingTaskList, doneTaskList, selectedTaskList];
 }

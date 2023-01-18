@@ -22,19 +22,27 @@ class _TaskListViewState extends TaskListViewModel {
       ),
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
+          if (state is TaskLoading) {
+            //TODO:Loading widget will add
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
           if (state is TaskLoaded) {
-            return Center(
+            return const Center(
               child: Text('Loaded Mode'),
             );
           }
 
           if (state is TaskSelection) {
-            return Center(
+            return const Center(
               child: Text('Selection Mode'),
             );
           }
 
-          //Todo:Error widget will add
+          //TODO:Error widget will add
+
           return const Center(
             child: Text('Something get wrong...'),
           );

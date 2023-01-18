@@ -5,7 +5,7 @@ import 'package:todo_app/core/const/string.dart';
 
 part 'task_time.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 3)
 class TaskTime extends Equatable {
   @HiveField(0)
   final int hour;
