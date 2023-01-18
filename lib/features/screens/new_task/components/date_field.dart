@@ -30,40 +30,43 @@ class _TaskDateField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text(
-          StringConst.date.toCapitalized(),
-          style: context.textTheme.headline5,
-        ),
-        BlocBuilder<NewTaskCubit, NewTaskState>(
-          builder: (context, state) {
-            return GestureDetector(
-              onTap: () async {
-                await getDate(context);
-              },
-              child: Column(
+    return GestureDetector(
+      onTap: () async {
+        await getDate(context);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            StringConst.date.toCapitalized(),
+            style: context.textTheme.headline5,
+          ),
+          BlocBuilder<NewTaskCubit, NewTaskState>(
+            builder: (context, state) {
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const PaddingConst.smallSymmetricVertical(),
-                    child: Text(
-                      state is NewTaskFilling
-                          ? state.newTask.date.formatDate
-                          : StringConst.dateHint.toCapitalized(),
-                      style: context.textTheme.headline4,
+                    child: SizedBox(
+                      width: context.dynamicWidth(1),
+                      child: Text(
+                        state is NewTaskFilling
+                            ? state.newTask.date.formatDate
+                            : StringConst.dateHint.toCapitalized(),
+                        style: context.textTheme.headline4,
+                      ),
                     ),
                   ),
                   const _Underline(),
                 ],
-              ),
-            );
-          },
-        ),
-      ],
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
