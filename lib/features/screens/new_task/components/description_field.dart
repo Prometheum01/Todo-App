@@ -35,6 +35,15 @@ class _TaskDescriptionField extends StatelessWidget {
               focusedBorder: OutlineBorderConst.descriptionField(),
               errorBorder: OutlineBorderConst.descriptionErrorField(),
             ),
+            validator: (value) {
+              if (value != null) {
+                if (value.trim().isEmpty) {
+                  return 'Please fill this field!';
+                }
+                return null;
+              }
+              return 'Please fill this field!';
+            },
           ),
         ),
       ],

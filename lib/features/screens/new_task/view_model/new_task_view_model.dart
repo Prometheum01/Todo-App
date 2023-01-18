@@ -7,6 +7,7 @@ import '../view/new_task_view.dart';
 
 abstract class NewTaskViewModel extends State<NewTaskView> {
   late TextEditingController titleController, descriptionController;
+  late final validatorKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -16,16 +17,17 @@ abstract class NewTaskViewModel extends State<NewTaskView> {
   }
 
   addNewTask() {
-    //Control values are valid
     //Add Bloc List
     //Add Hive
 
-    Task task = (context.read<NewTaskCubit>().state as NewTaskFilling)
-        .newTask
-        .copyWith(
-            title: titleController.text,
-            description: descriptionController.text);
+    if (validatorKey.currentState!.validate()) {
+      Task task = (context.read<NewTaskCubit>().state as NewTaskFilling)
+          .newTask
+          .copyWith(
+              title: titleController.text,
+              description: descriptionController.text);
 
-    Navigator.of(context).pop();
+      Navigator.of(context).pop();
+    }
   }
 }

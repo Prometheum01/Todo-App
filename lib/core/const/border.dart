@@ -21,3 +21,14 @@ class OutlineBorderConst extends OutlineInputBorder {
           ),
         );
 }
+
+class UnderlineBorderConst extends UnderlineInputBorder {
+  UnderlineBorderConst.greyField()
+      : super(
+          borderSide: BorderSide(
+            color: const Color(ColorConst.palatinateBlue).withOpacity(
+              0.12,
+            ),
+          ),
+        );
+}

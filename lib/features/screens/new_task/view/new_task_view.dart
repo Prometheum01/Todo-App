@@ -43,35 +43,38 @@ class _NewTaskViewState extends NewTaskViewModel {
         child: SafeArea(
           child: Padding(
             padding: const PaddingConst.smallAll(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Flexible(flex: 1, child: _Title()),
-                const Flexible(flex: 1, child: _TaskTypeList()),
-                Flexible(
-                  flex: 1,
-                  child: _TaskTitleField(
-                    controller: titleController,
+            child: Form(
+              key: validatorKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Flexible(flex: 1, child: _Title()),
+                  const Flexible(flex: 1, child: _TaskTypeList()),
+                  Flexible(
+                    flex: 1,
+                    child: _TaskTitleField(
+                      controller: titleController,
+                    ),
                   ),
-                ),
-                Flexible(
-                  flex: 3,
-                  child: _TaskDescriptionField(
-                    controller: descriptionController,
+                  Flexible(
+                    flex: 3,
+                    child: _TaskDescriptionField(
+                      controller: descriptionController,
+                    ),
                   ),
-                ),
-                const Flexible(flex: 1, child: _TaskDateField()),
-                const Flexible(flex: 1, child: _TaskTimeField()),
-                Flexible(
-                  flex: 1,
-                  child: _AddButton(
-                    onPressed: () {
-                      addNewTask();
-                    },
-                  ),
-                )
-              ],
+                  const Flexible(flex: 1, child: _TaskDateField()),
+                  const Flexible(flex: 1, child: _TaskTimeField()),
+                  Flexible(
+                    flex: 1,
+                    child: _AddButton(
+                      onPressed: () {
+                        addNewTask();
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ));

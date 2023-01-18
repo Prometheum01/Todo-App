@@ -19,38 +19,26 @@ class _TaskTitleField extends StatelessWidget {
           StringConst.title.toCapitalized(),
           style: context.textTheme.headline5,
         ),
-        Stack(
-          children: [
-            TextFormField(
-              controller: _controller,
-              style: context.textTheme.headline4,
-              onFieldSubmitted: (value) {},
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                hintText: StringConst.titleHint.toCapitalized(),
-                hintStyle: context.textTheme.headline5,
-                focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent)),
-                enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent)),
-              ),
-            ),
-            Positioned(
-              bottom: 1,
-              child: Container(
-                height: 1,
-                width: context.dynamicWidth(1),
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(ColorConst.palatinateBlue),
-                      Color(ColorConst.deepPink),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+        TextFormField(
+          controller: _controller,
+          style: context.textTheme.headline4,
+          onFieldSubmitted: (value) {},
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            hintText: StringConst.titleHint.toCapitalized(),
+            hintStyle: context.textTheme.headline5,
+            focusedBorder: UnderlineBorderConst.greyField(),
+            enabledBorder: UnderlineBorderConst.greyField(),
+          ),
+          validator: (value) {
+            if (value != null) {
+              if (value.trim().isEmpty) {
+                return 'Please fill this field';
+              }
+              return null;
+            }
+            return 'Please fill this field';
+          },
         ),
       ],
     );
