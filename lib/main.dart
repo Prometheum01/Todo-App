@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
+import 'package:todo_app/features/screens/task_list/view/task_list_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,12 +11,35 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  final x = 19;
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Todo App',
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NewTaskCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Todo App',
+        theme: ThemeData(
+          textTheme: TextTheme(
+            headline3: GoogleFonts.baloo2().copyWith(
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
+                color: Colors.black),
+            headline4: GoogleFonts.lato().copyWith(
+                fontSize: 12,
+                fontWeight: FontWeight.normal,
+                color: Colors.black),
+            headline5: GoogleFonts.lato().copyWith(
+              fontSize: 12,
+              fontWeight: FontWeight.w900,
+              color: Colors.black.withOpacity(0.2),
+            ),
+          ),
+        ),
+        home: const TaskListView(),
+      ),
     );
   }
 }

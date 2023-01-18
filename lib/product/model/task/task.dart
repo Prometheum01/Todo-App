@@ -34,6 +34,32 @@ class Task extends Equatable {
     this.isDone = false,
   });
 
+  static Task get emptyTask => Task(
+        taskType: TaskType.taskList.first,
+        title: '',
+        description: '',
+        date: DateTime.now().toString(),
+        time: DateTime.now().toString(),
+      );
+
+  Task copyWith({
+    TaskType? taskType,
+    String? title,
+    String? description,
+    String? date,
+    String? time,
+    bool? isDone,
+  }) {
+    return Task(
+      taskType: taskType ?? this.taskType,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      date: date ?? this.date,
+      time: time ?? this.time,
+      isDone: isDone ?? this.isDone,
+    );
+  }
+
   @override
   List<Object?> props() => [taskType, title, description, date, time, isDone];
 }

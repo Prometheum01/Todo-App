@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:todo_app/core/const/color.dart';
 
 import '../../../core/const/image.dart';
 
@@ -23,32 +24,32 @@ class TaskType extends Equatable {
         const TaskType(
           name: 'Shopping',
           iconPath: ImageConst.shoppingIconPath,
-          colorList: [0xFFFE1E9A, 0xFFFEA64C],
-        ),
-        const TaskType(
-          name: 'Gym',
-          iconPath: ImageConst.gymIconPath,
-          colorList: [0xFFFE1E9A, 0xFF254DDE],
-        ),
-        const TaskType(
-          name: 'Location',
-          iconPath: ImageConst.locationIconPath,
-          colorList: [0xFF254DDE, 0xFF181743],
-        ),
-        const TaskType(
-          name: 'Other',
-          iconPath: ImageConst.otherIconPath,
-          colorList: [0xFF181743, 0xFF88889F],
-        ),
-        const TaskType(
-          name: 'Party',
-          iconPath: ImageConst.partyIconPath,
-          colorList: [0xFF254DDE, 0xFF00FFFF],
+          colorList: [ColorConst.deepPink, ColorConst.yellowOrange],
         ),
         const TaskType(
           name: 'Sport',
           iconPath: ImageConst.sportIconPath,
-          colorList: [0xFFFE1E9A, 0xFF254DDE],
+          colorList: [ColorConst.deepPink, ColorConst.palatinateBlue],
+        ),
+        const TaskType(
+          name: 'Location',
+          iconPath: ImageConst.locationIconPath,
+          colorList: [ColorConst.palatinateBlue, ColorConst.yankeesBlue],
+        ),
+        const TaskType(
+          name: 'Party',
+          iconPath: ImageConst.partyIconPath,
+          colorList: [ColorConst.palatinateBlue, ColorConst.aqua],
+        ),
+        const TaskType(
+          name: 'Gym',
+          iconPath: ImageConst.gymIconPath,
+          colorList: [ColorConst.deepPink, ColorConst.palatinateBlue],
+        ),
+        const TaskType(
+          name: 'Other',
+          iconPath: ImageConst.otherIconPath,
+          colorList: [ColorConst.yankeesBlue, ColorConst.romanSilver],
         ),
       ];
 
