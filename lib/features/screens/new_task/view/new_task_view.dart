@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/const/border.dart';
@@ -37,7 +38,7 @@ class _NewTaskViewState extends NewTaskViewModel {
         width: context.dynamicWidth(0.75),
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: RadiusConst.horizontalLeftLarge(),
+          borderRadius: RadiusConst.largeHorizontalLeft(),
         ),
         child: SafeArea(
           child: Padding(

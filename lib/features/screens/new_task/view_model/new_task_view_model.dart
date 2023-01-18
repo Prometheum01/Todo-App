@@ -17,7 +17,6 @@ abstract class NewTaskViewModel extends State<NewTaskView> {
 
   addNewTask() {
     //Control values are valid
-    //Clear Cubits
     //Add Bloc List
     //Add Hive
 
@@ -26,8 +25,6 @@ abstract class NewTaskViewModel extends State<NewTaskView> {
         .copyWith(
             title: titleController.text,
             description: descriptionController.text);
-
-    print(task.toString());
 
     Navigator.of(context).pop();
   }

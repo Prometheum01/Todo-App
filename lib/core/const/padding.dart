@@ -20,6 +20,8 @@ class PaddingConst extends EdgeInsets {
   const PaddingConst.largeSymmetricVertical()
       : super.symmetric(vertical: _large);
 
+  const PaddingConst.xLargeSymmetricHorizontal()
+      : super.symmetric(horizontal: _xLarge);
   //Only
   const PaddingConst.smallLeft() : super.only(left: _small);
 }

@@ -8,6 +8,8 @@ class RadiusConst extends BorderRadius {
   static const double _large = 16;
   static const double _xLarge = 24;
 
-  const RadiusConst.horizontalLeftLarge()
+  const RadiusConst.xLargeAll() : super.all(const Radius.circular(_xLarge));
+
+  const RadiusConst.largeHorizontalLeft()
       : super.horizontal(left: const Radius.circular(_large));
 }
