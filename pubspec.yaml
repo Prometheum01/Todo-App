@@ -17,6 +17,7 @@ dependencies:
   #Core
   kartal: ^2.7.0
   equatable: ^2.0.5
+  intl: ^0.18.0
 
   #Database
   hive: ^2.2.3

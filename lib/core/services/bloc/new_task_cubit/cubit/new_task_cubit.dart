@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:todo_app/product/model/task/task.dart';
+import 'package:todo_app/product/model/task_date/task_date.dart';
+import 'package:todo_app/product/model/task_time/task_time.dart';
 import 'package:todo_app/product/model/task_type/task_type.dart';
 
 part 'new_task_state.dart';
@@ -28,24 +29,22 @@ class NewTaskCubit extends Cubit<NewTaskState> {
     }
   }
 
-  void changeDate(DateTime newDateTime) {
+  void changeDate(TaskDate newDateTime) {
     if (state is NewTaskFilling) {
       final state = this.state as NewTaskFilling;
 
       emit(
-        NewTaskFilling(
-            newTask: state.newTask.copyWith(date: newDateTime.toString())),
+        NewTaskFilling(newTask: state.newTask.copyWith(date: newDateTime)),
       );
     }
   }
 
-  void changeTime(TimeOfDay newTimeOfDay) {
+  void changeTime(TaskTime newTimeOfDay) {
     if (state is NewTaskFilling) {
       final state = this.state as NewTaskFilling;
 
       emit(
-        NewTaskFilling(
-            newTask: state.newTask.copyWith(time: newTimeOfDay.toString())),
+        NewTaskFilling(newTask: state.newTask.copyWith(time: newTimeOfDay)),
       );
     }
   }

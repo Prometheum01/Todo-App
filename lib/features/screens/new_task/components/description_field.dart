@@ -13,9 +13,12 @@ class _TaskDescriptionField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          StringConst.description.toCapitalized(),
-          style: context.textTheme.headline5,
+        Padding(
+          padding: const PaddingConst.smallSymmetricVertical(),
+          child: Text(
+            StringConst.description.toCapitalized(),
+            style: context.textTheme.headline5,
+          ),
         ),
         Flexible(
           child: TextFormField(

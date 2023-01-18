@@ -6,18 +6,25 @@ class _TaskDateField extends StatelessWidget {
   }) : super(key: key);
 
   Future<void> getDate(BuildContext context) async {
+    DateTime initialDate =
+        (context.read<NewTaskCubit>().state as NewTaskFilling)
+            .newTask
+            .date
+            .toDateTime;
+
     DateTime? date = await showDatePicker(
       context: context,
       firstDate: DateTime(
         DateTime.now().year,
       ),
-      initialDate: DateTime.now(),
-      lastDate: DateTime(DateTime.now().year + 1),
+      initialDate: initialDate,
+      lastDate:
+          DateTime(initialDate.year + 1, initialDate.month, initialDate.day),
     );
 
     if (date != null) {
       // ignore: use_build_context_synchronously
-      context.read<NewTaskCubit>().changeDate(date);
+      context.read<NewTaskCubit>().changeDate(date.toTaskDate);
     }
   }
 
@@ -45,7 +52,7 @@ class _TaskDateField extends StatelessWidget {
                     padding: const PaddingConst.smallSymmetricVertical(),
                     child: Text(
                       state is NewTaskFilling
-                          ? state.newTask.date.toString()
+                          ? state.newTask.date.formatDate
                           : StringConst.dateHint.toCapitalized(),
                       style: context.textTheme.headline4,
                     ),

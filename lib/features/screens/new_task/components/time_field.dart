@@ -6,15 +6,20 @@ class _TaskTimeField extends StatelessWidget {
   }) : super(key: key);
 
   Future<void> getTime(BuildContext context) async {
+    TimeOfDay initialTime =
+        (context.read<NewTaskCubit>().state as NewTaskFilling)
+            .newTask
+            .time
+            .toTimeOfDay;
+
     TimeOfDay? timeOfDay = await showTimePicker(
       context: context,
-      initialTime:
-          TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute),
+      initialTime: initialTime,
     );
 
     if (timeOfDay != null) {
       // ignore: use_build_context_synchronously
-      context.read<NewTaskCubit>().changeTime(timeOfDay);
+      context.read<NewTaskCubit>().changeTime(timeOfDay.toTaskTime);
     }
   }
 
@@ -42,7 +47,7 @@ class _TaskTimeField extends StatelessWidget {
                     padding: const PaddingConst.smallSymmetricVertical(),
                     child: Text(
                       state is NewTaskFilling
-                          ? state.newTask.time.toString()
+                          ? state.newTask.time.formatTime
                           : StringConst.timeHint.toCapitalized(),
                       style: context.textTheme.headline4,
                     ),

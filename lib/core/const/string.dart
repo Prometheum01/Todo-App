@@ -18,4 +18,7 @@ class StringConst {
   static const timeHint = 'tap to select time...';
 
   static const addTask = 'add task';
+
+  static const timeAm = 'am';
+  static const timePm = 'pm';
 }
