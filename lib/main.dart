@@ -30,20 +30,28 @@ class MyApp extends StatelessWidget {
         title: 'Todo App',
         theme: ThemeData(
           textTheme: TextTheme(
-            headline3: GoogleFonts.baloo2().copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                color: Colors.black),
-            headline4: GoogleFonts.lato().copyWith(
+              headline2: GoogleFonts.baloo2().copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black),
+              headline3: GoogleFonts.lato().copyWith(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black),
+              headline4: GoogleFonts.lato().copyWith(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black),
+              headline5: GoogleFonts.lato().copyWith(
                 fontSize: 12,
-                fontWeight: FontWeight.normal,
-                color: Colors.black),
-            headline5: GoogleFonts.lato().copyWith(
-              fontSize: 12,
-              fontWeight: FontWeight.w900,
-              color: Colors.black.withOpacity(0.2),
-            ),
-          ),
+                fontWeight: FontWeight.w900,
+                color: Colors.black.withOpacity(0.2),
+              ),
+              headline6: GoogleFonts.lato().copyWith(
+                fontSize: 10,
+                fontWeight: FontWeight.w400,
+                color: Colors.black.withOpacity(0.6),
+              )),
         ),
         home: const TaskListView(),
       ),

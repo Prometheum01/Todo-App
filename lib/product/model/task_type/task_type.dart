@@ -53,6 +53,17 @@ class TaskType extends Equatable {
         ),
       ];
 
+  static TaskType get removeType => const TaskType(
+        name: 'Remove',
+        iconPath: '',
+        colorList: [ColorConst.deepPink, ColorConst.redCrayola],
+      );
+  static TaskType get emptyType => const TaskType(
+        name: 'Empty',
+        iconPath: '',
+        colorList: [0x00FFFFFF, 0x00FFFFFF],
+      );
+
   @override
   List<Object?> props() => [name, iconPath, colorList];
 }

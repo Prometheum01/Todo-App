@@ -7,4 +7,5 @@ class ImageConst {
   static const String otherIconPath = 'assets/svg/other.svg';
   static const String partyIconPath = 'assets/svg/party.svg';
   static const String sportIconPath = 'assets/svg/sport.svg';
+  static const String doneIconPath = 'assets/svg/done.svg';
 }

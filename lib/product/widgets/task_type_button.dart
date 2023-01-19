@@ -8,10 +8,7 @@ import '../../core/const/padding.dart';
 import '../model/task_type/task_type.dart';
 
 class TaskTypeButton extends StatelessWidget {
-  const TaskTypeButton({
-    Key? key,
-    required this.type,
-  }) : super(key: key);
+  const TaskTypeButton({Key? key, required this.type}) : super(key: key);
 
   final TaskType type;
 

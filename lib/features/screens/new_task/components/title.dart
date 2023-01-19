@@ -9,7 +9,7 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       StringConst.newTask.toUpperCase(),
-      style: context.textTheme.headline3,
+      style: context.textTheme.headline2,
     );
   }
 }

@@ -1,6 +1,8 @@
 class ColorConst {
   const ColorConst._();
 
+  static const int redCrayola = 0xFFf40752;
+
   static const int deepPink = 0xFFFE1E9A;
   static const int yellowOrange = 0xFFFEA64C;
   static const int palatinateBlue = 0xFF254DDE;
