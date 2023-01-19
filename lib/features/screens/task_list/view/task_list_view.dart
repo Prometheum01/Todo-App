@@ -8,6 +8,7 @@ import 'package:todo_app/core/const/padding.dart';
 import 'package:todo_app/core/const/radius.dart';
 import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
 import 'package:todo_app/features/screens/new_task/view/new_task_view.dart';
+import 'package:todo_app/product/model/task/task.dart';
 import 'package:todo_app/product/widgets/widgets.dart';
 
 import '../../../../product/widgets/task_tile/main_tile.dart';
@@ -21,6 +22,167 @@ class TaskListView extends StatefulWidget {
 }
 
 class _TaskListViewState extends TaskListViewModel {
+  @override
+  Widget build(BuildContext context) {
+    return CustomBackground(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'TODO',
+            style: context.textTheme.headline2,
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                //Open done task page
+                openDonePage();
+              },
+              icon: SvgPicture.asset(
+                ImageConst.doneTaskListIconPath,
+              ),
+            )
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        body: Padding(
+          padding: const PaddingConst.mediumSymmetricHorizontal(),
+          child: BlocBuilder<TaskBloc, TaskState>(
+            builder: (context, state) {
+              if (state is TaskLoading) {
+                //TODO:Loading widget will add
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              if (state is TaskLoaded) {
+                List<Task> list = state.waitingTaskList;
+                return Stack(
+                  children: [
+                    ListView.separated(
+                      itemCount: list.length,
+                      separatorBuilder: (context, index) => const Padding(
+                          padding: PaddingConst.smallSymmetricVertical()),
+                      itemBuilder: (context, index) => TaskTile(
+                        task: list[index],
+                        isLeftDone: true,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const PaddingConst.mediumSymmetricVertical(),
+                        child: CircleButtonRow(
+                          iconButtonList: [
+                            GradientIconButton(
+                              iconPath: ImageConst.doneWhiteIconPath,
+                              colorList: const [
+                                Color(ColorConst.deepPink),
+                                Color(ColorConst.palatinateBlue),
+                              ],
+                              onPressed: () {
+                                openSelectionMode();
+                              },
+                            ),
+                            GradientIconButton(
+                              iconPath: ImageConst.calendarIconPath,
+                              colorList: const [Colors.white, Colors.white],
+                              onPressed: () {
+                                //Open calendar page
+                              },
+                            ),
+                            GradientIconButton(
+                              iconPath: ImageConst.addIconPath,
+                              colorList: const [
+                                Color(ColorConst.palatinateBlue),
+                                Color(ColorConst.aqua),
+                              ],
+                              onPressed: () {
+                                openNewTask(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              }
+
+              if (state is TaskSelection) {
+                List<Task> list = state.waitingTaskList;
+
+                return Stack(
+                  children: [
+                    ListView.separated(
+                      itemCount: list.length,
+                      separatorBuilder: (context, index) => const Padding(
+                          padding: PaddingConst.smallSymmetricVertical()),
+                      itemBuilder: (context, index) => MainTile(
+                        task: list[index],
+                        isSelectionMode: true,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const PaddingConst.mediumSymmetricVertical(),
+                        child: CircleButtonRow(
+                          iconButtonList: [
+                            GradientIconButton(
+                              iconPath: ImageConst.cancelIconPath,
+                              colorList: const [
+                                Color(ColorConst.yankeesBlue),
+                                Color(ColorConst.romanSilver),
+                              ],
+                              onPressed: () {
+                                //Close select mode
+                                closeSelectionMode();
+                              },
+                            ),
+                            GradientIconButton(
+                              iconPath: ImageConst.doubleDoneIconPath,
+                              colorList: const [
+                                Color(ColorConst.palatinateBlue),
+                                Color(ColorConst.deepPink),
+                              ],
+                              onPressed: () {
+                                //mark done selected task
+                                addAllDone();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              }
+
+              //TODO:Error widget will add
+
+              return const Center(
+                child: Text('Something get wrong...'),
+              );
+            },
+          ),
+        ),
+        endDrawerEnableOpenDragGesture: false,
+        endDrawer: const NewTaskView(),
+      ),
+    );
+  }
+}
+
+class CustomBackground extends StatelessWidget {
+  const CustomBackground({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -43,150 +205,7 @@ class _TaskListViewState extends TaskListViewModel {
             fit: BoxFit.fill,
           ),
         ),
-        Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            title: Text(
-              'TODO',
-              style: context.textTheme.headline2,
-            ),
-            centerTitle: true,
-            elevation: 0,
-            actions: [
-              IconButton(
-                onPressed: () {
-                  //Open done task page
-                },
-                icon: SvgPicture.asset(
-                  ImageConst.doneTaskListIconPath,
-                ),
-              )
-            ],
-          ),
-          backgroundColor: Colors.transparent,
-          body: Padding(
-            padding: const PaddingConst.mediumSymmetricHorizontal(),
-            child: BlocBuilder<TaskBloc, TaskState>(
-              builder: (context, state) {
-                if (state is TaskLoading) {
-                  //TODO:Loading widget will add
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-
-                if (state is TaskLoaded) {
-                  return Stack(
-                    children: [
-                      ListView.separated(
-                        itemCount: state.waitingTaskList.length,
-                        separatorBuilder: (context, index) => const Padding(
-                            padding: PaddingConst.smallSymmetricVertical()),
-                        itemBuilder: (context, index) => TaskTile(
-                          task: state.waitingTaskList[index],
-                          isLeftDone: true,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const PaddingConst.mediumSymmetricVertical(),
-                          child: CircleButtonRow(
-                            iconButtonList: [
-                              GradientIconButton(
-                                iconPath: ImageConst.doneWhiteIconPath,
-                                colorList: const [
-                                  Color(ColorConst.deepPink),
-                                  Color(ColorConst.palatinateBlue),
-                                ],
-                                onPressed: () {
-                                  openSelectionMode();
-                                },
-                              ),
-                              GradientIconButton(
-                                iconPath: ImageConst.calendarIconPath,
-                                colorList: const [Colors.white, Colors.white],
-                                onPressed: () {
-                                  //Open calendar page
-                                },
-                              ),
-                              GradientIconButton(
-                                iconPath: ImageConst.addIconPath,
-                                colorList: const [
-                                  Color(ColorConst.palatinateBlue),
-                                  Color(ColorConst.aqua),
-                                ],
-                                onPressed: () {
-                                  openNewTask(context);
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  );
-                }
-
-                if (state is TaskSelection) {
-                  return Stack(
-                    children: [
-                      ListView.separated(
-                        itemCount: state.waitingTaskList.length,
-                        separatorBuilder: (context, index) => const Padding(
-                            padding: PaddingConst.smallSymmetricVertical()),
-                        itemBuilder: (context, index) => MainTile(
-                          task: state.waitingTaskList[index],
-                          isSelectionMode: true,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const PaddingConst.mediumSymmetricVertical(),
-                          child: CircleButtonRow(
-                            iconButtonList: [
-                              GradientIconButton(
-                                iconPath: ImageConst.cancelIconPath,
-                                colorList: const [
-                                  Color(ColorConst.yankeesBlue),
-                                  Color(ColorConst.romanSilver),
-                                ],
-                                onPressed: () {
-                                  //Close select mode
-                                  closeSelectionMode();
-                                },
-                              ),
-                              GradientIconButton(
-                                iconPath: ImageConst.doubleDoneIconPath,
-                                colorList: const [
-                                  Color(ColorConst.palatinateBlue),
-                                  Color(ColorConst.deepPink),
-                                ],
-                                onPressed: () {
-                                  //mark done selected task
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  );
-                }
-
-                //TODO:Error widget will add
-
-                return const Center(
-                  child: Text('Something get wrong...'),
-                );
-              },
-            ),
-          ),
-          endDrawerEnableOpenDragGesture: false,
-          endDrawer: const NewTaskView(),
-        ),
+        child
       ],
     );
   }

@@ -29,6 +29,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Todo App',
         theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true),
           textTheme: TextTheme(
               headline2: GoogleFonts.baloo2().copyWith(
                   fontSize: 20,

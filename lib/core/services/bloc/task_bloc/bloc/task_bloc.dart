@@ -34,10 +34,33 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       if (state is TaskLoaded) {
         final state = this.state as TaskLoaded;
 
+        for (Task task in event.taskList) {
+          if (state.waitingTaskList.contains(task)) {
+            state.waitingTaskList.remove(task);
+          }
+        }
+
         emit(
           TaskLoaded(
-            waitingTaskList: List.from(state.waitingTaskList)
-              ..remove(event.taskList),
+            waitingTaskList: state.waitingTaskList,
+            doneTaskList: List.from(state.doneTaskList)..addAll(event.taskList),
+          ),
+        );
+
+        TaskHive(dbKey: waitingTaskDbKey).deleteTask(event.taskList);
+        await TaskHive(dbKey: doneTaskDbKey).addNewTask(event.taskList);
+      } else if (state is TaskSelection) {
+        final state = this.state as TaskSelection;
+
+        for (Task task in event.taskList) {
+          if (state.waitingTaskList.contains(task)) {
+            state.waitingTaskList.remove(task);
+          }
+        }
+
+        emit(
+          TaskLoaded(
+            waitingTaskList: state.waitingTaskList,
             doneTaskList: List.from(state.doneTaskList)..addAll(event.taskList),
           ),
         );
@@ -51,40 +74,66 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       if (state is TaskLoaded) {
         final state = this.state as TaskLoaded;
 
+        for (Task task in event.taskList) {
+          if (state.doneTaskList.contains(task)) {
+            state.doneTaskList.remove(task);
+          }
+        }
+
         emit(
           TaskLoaded(
               waitingTaskList: List.from(state.waitingTaskList)
                 ..addAll(event.taskList),
-              doneTaskList: List.from(state.doneTaskList)
-                ..remove(event.taskList)),
+              doneTaskList: state.doneTaskList),
         );
-
         await TaskHive(dbKey: waitingTaskDbKey).addNewTask(event.taskList);
         TaskHive(dbKey: doneTaskDbKey).deleteTask(event.taskList);
+      } else if (state is TaskSelection) {
+        final state = this.state as TaskSelection;
+
+        for (Task task in event.taskList) {
+          if (state.doneTaskList.contains(task)) {
+            state.doneTaskList.remove(task);
+          }
+        }
+
+        emit(
+          TaskLoaded(
+              waitingTaskList: List.from(state.waitingTaskList)
+                ..addAll(event.taskList),
+              doneTaskList: state.doneTaskList),
+        );
+
+        TaskHive(dbKey: waitingTaskDbKey).deleteTask(event.taskList);
+        await TaskHive(dbKey: doneTaskDbKey).addNewTask(event.taskList);
       }
     });
 
-    on<DeleteTask>((event, emit) async {
+    on<DeleteTask>((event, emit) {
       if (state is TaskLoaded) {
         final state = this.state as TaskLoaded;
-
         if (!event.isInDoneDb) {
-          emit(
-            TaskLoaded(
-                waitingTaskList: List.from(state.waitingTaskList)
-                  ..remove(event.taskList),
-                doneTaskList: state.doneTaskList),
-          );
+          for (Task task in event.taskList) {
+            print(state.waitingTaskList.length);
+            if (state.waitingTaskList.contains(task)) {
+              state.waitingTaskList.remove(task);
+            }
+            print(state.waitingTaskList.length);
+          }
           TaskHive(dbKey: waitingTaskDbKey).deleteTask(event.taskList);
         } else {
-          emit(
-            TaskLoaded(
-                waitingTaskList: state.waitingTaskList,
-                doneTaskList: List.from(state.waitingTaskList)
-                  ..remove(event.taskList)),
-          );
+          for (Task task in event.taskList) {
+            if (state.doneTaskList.contains(task)) {
+              state.doneTaskList.remove(task);
+            }
+          }
           TaskHive(dbKey: doneTaskDbKey).deleteTask(event.taskList);
         }
+        emit(
+          TaskLoaded(
+              waitingTaskList: state.waitingTaskList,
+              doneTaskList: state.doneTaskList),
+        );
       }
     });
 

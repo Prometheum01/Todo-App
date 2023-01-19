@@ -36,9 +36,8 @@ class TaskHive {
           //This value already are in the box
         }
       }
-    } catch (e) {
-      print(e);
-    }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   void deleteTask(List<Task> taskList) {
@@ -52,9 +51,8 @@ class TaskHive {
           //This value already are not in the box
         }
       }
-    } catch (e) {
-      print(e);
-    }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   Future<bool> changeTask(Task changedTask) async {

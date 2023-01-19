@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
+import 'package:todo_app/features/screens/done_task/view/done_task_view.dart';
 
 import '../../../../core/services/bloc/task_bloc/bloc/task_bloc.dart';
 import '../view/task_list_view.dart';
@@ -17,11 +18,11 @@ abstract class TaskListViewModel extends State<TaskListView> {
     Scaffold.of(context).openEndDrawer();
   }
 
-  closeSelectionMode() {
+  void closeSelectionMode() {
     context.read<TaskBloc>().add(LoadTask());
   }
 
-  openSelectionMode() {
+  void openSelectionMode() {
     context.read<TaskBloc>().emit(TaskSelection(
         selectedTaskList: const [],
         waitingTaskList:
@@ -30,7 +31,7 @@ abstract class TaskListViewModel extends State<TaskListView> {
             (context.read<TaskBloc>().state as TaskLoaded).doneTaskList));
   }
 
-  addAllDone() {
+  void addAllDone() {
     context.read<TaskBloc>().add(
           DoneTask(
             taskList: (context.read<TaskBloc>().state as TaskSelection)
@@ -39,7 +40,11 @@ abstract class TaskListViewModel extends State<TaskListView> {
         );
   }
 
-  openCalendarPage() {}
+  void openCalendarPage() {}
 
-  openDonePage() {}
+  void openDonePage() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const DoneTaskView(),
+    ));
+  }
 }
