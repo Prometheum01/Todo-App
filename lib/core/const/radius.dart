@@ -14,4 +14,6 @@ class RadiusConst extends BorderRadius {
 
   const RadiusConst.largeHorizontalLeft()
       : super.horizontal(left: const Radius.circular(_large));
+
+  const RadiusConst.circleAll() : super.all(const Radius.circular(360));
 }

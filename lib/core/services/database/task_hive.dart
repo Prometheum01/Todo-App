@@ -25,35 +25,35 @@ class TaskHive {
     await Hive.openBox<Task>(doneTaskDbKey);
   }
 
-  Future<bool> addNewTask(Task newTask) async {
+  Future<void> addNewTask(List<Task> newTaskList) async {
     try {
       Box<Task> box = Hive.box<Task>(dbKey);
 
-      if (!box.values.contains(newTask)) {
-        await box.add(newTask);
-        return true;
-      } else {
-        //This value already are in the box
-        return false;
+      for (Task newTask in newTaskList) {
+        if (!box.values.contains(newTask)) {
+          await box.add(newTask);
+        } else {
+          //This value already are in the box
+        }
       }
     } catch (e) {
-      return false;
+      print(e);
     }
   }
 
-  bool deleteTask(Task task) {
+  void deleteTask(List<Task> taskList) {
     try {
       Box<Task> box = Hive.box<Task>(dbKey);
 
-      if (box.values.contains(task)) {
-        box.deleteAt(box.values.toList().indexOf(task));
-        return true;
-      } else {
-        //This value already are not in the box
-        return false;
+      for (Task task in taskList) {
+        if (box.values.contains(task)) {
+          box.deleteAt(box.values.toList().indexOf(task));
+        } else {
+          //This value already are not in the box
+        }
       }
     } catch (e) {
-      return false;
+      print(e);
     }
   }
 

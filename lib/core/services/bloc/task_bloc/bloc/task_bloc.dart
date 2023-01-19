@@ -22,11 +22,69 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         emit(
           TaskLoaded(
               waitingTaskList: List.from(state.waitingTaskList)
-                ..add(event.newTask),
+                ..addAll(event.newTaskList),
               doneTaskList: state.doneTaskList),
         );
 
-        await TaskHive().addNewTask(event.newTask);
+        await TaskHive().addNewTask(event.newTaskList);
+      }
+    });
+
+    on<DoneTask>((event, emit) async {
+      if (state is TaskLoaded) {
+        final state = this.state as TaskLoaded;
+
+        emit(
+          TaskLoaded(
+            waitingTaskList: List.from(state.waitingTaskList)
+              ..remove(event.taskList),
+            doneTaskList: List.from(state.doneTaskList)..addAll(event.taskList),
+          ),
+        );
+
+        TaskHive(dbKey: waitingTaskDbKey).deleteTask(event.taskList);
+        await TaskHive(dbKey: doneTaskDbKey).addNewTask(event.taskList);
+      }
+    });
+
+    on<UndoneTask>((event, emit) async {
+      if (state is TaskLoaded) {
+        final state = this.state as TaskLoaded;
+
+        emit(
+          TaskLoaded(
+              waitingTaskList: List.from(state.waitingTaskList)
+                ..addAll(event.taskList),
+              doneTaskList: List.from(state.doneTaskList)
+                ..remove(event.taskList)),
+        );
+
+        await TaskHive(dbKey: waitingTaskDbKey).addNewTask(event.taskList);
+        TaskHive(dbKey: doneTaskDbKey).deleteTask(event.taskList);
+      }
+    });
+
+    on<DeleteTask>((event, emit) async {
+      if (state is TaskLoaded) {
+        final state = this.state as TaskLoaded;
+
+        if (!event.isInDoneDb) {
+          emit(
+            TaskLoaded(
+                waitingTaskList: List.from(state.waitingTaskList)
+                  ..remove(event.taskList),
+                doneTaskList: state.doneTaskList),
+          );
+          TaskHive(dbKey: waitingTaskDbKey).deleteTask(event.taskList);
+        } else {
+          emit(
+            TaskLoaded(
+                waitingTaskList: state.waitingTaskList,
+                doneTaskList: List.from(state.waitingTaskList)
+                  ..remove(event.taskList)),
+          );
+          TaskHive(dbKey: doneTaskDbKey).deleteTask(event.taskList);
+        }
       }
     });
 

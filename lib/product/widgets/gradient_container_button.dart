@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
 import '../../core/const/radius.dart';
-import '../model/task_type/task_type.dart';
 
 class GradientContainerButton extends StatelessWidget {
   const GradientContainerButton({
     Key? key,
     required this.text,
     required this.onPressed,
-    required this.type,
+    required this.colorList,
   }) : super(key: key);
 
   final String text;
   final Function onPressed;
-  final TaskType type;
+  final List<int> colorList;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +25,12 @@ class GradientContainerButton extends StatelessWidget {
         onTap: () {
           onPressed();
         },
-        splashColor: Color(type.colorList[0]),
+        splashColor: Color(colorList[0]),
         child: Ink(
           decoration: BoxDecoration(
             borderRadius: const RadiusConst.smallAll(),
             gradient: LinearGradient(
-              colors: [Color(type.colorList[0]), Color(type.colorList[1])],
+              colors: [Color(colorList[0]), Color(colorList[1])],
             ),
           ),
           child: Center(

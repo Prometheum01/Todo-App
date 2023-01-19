@@ -103,7 +103,7 @@ class MainTile extends StatelessWidget {
                                 );
                               }
 
-                              return Center(
+                              return const Center(
                                 child: Text('Something went wrong!'),
                               );
                             },

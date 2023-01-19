@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/const/string.dart';
-import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
+import 'package:todo_app/product/widgets/task_tile/task_tile_view_model.dart';
 
 import '../../../core/const/radius.dart';
 import '../../model/task/task.dart';
@@ -11,64 +10,65 @@ import '../../model/task_type/task_type.dart';
 import '../widgets.dart';
 import 'main_tile.dart';
 
-class TaskTile extends StatelessWidget {
-  TaskTile({
+class TaskTile extends StatefulWidget {
+  const TaskTile({
     Key? key,
     required this.task,
+    this.isLeftDone = true,
   }) : super(key: key);
 
   final Task task;
 
-  selectDone() {}
+  final bool isLeftDone;
 
-  selectRemove() {}
+  @override
+  State<TaskTile> createState() => _TaskTileState();
+}
 
-  openSelectionMode(BuildContext context) {
-    context.read<TaskBloc>().emit(TaskSelection(
-        selectedTaskList: [task],
-        waitingTaskList:
-            (context.read<TaskBloc>().state as TaskLoaded).waitingTaskList,
-        doneTaskList:
-            (context.read<TaskBloc>().state as TaskLoaded).doneTaskList));
-  }
-
-  final PageController controller = PageController(initialPage: 1);
-
+class _TaskTileState extends TaskTileViewModel {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: context.dynamicHeight(0.1),
       child: Stack(
         children: [
-          MainTile(task: task, isSelectionMode: false),
+          MainTile(task: widget.task, isSelectionMode: false),
           PageView(
             controller: controller,
             children: [
               GradientContainerButton(
-                  onPressed: () {
+                onPressed: () {
+                  if (widget.isLeftDone) {
                     selectDone();
-                  },
-                  text: StringConst.done.toUpperCase(),
-                  type: task.taskType),
+                  } else {
+                    selectUndone();
+                  }
+
+                  controller.jumpToPage(1);
+                },
+                text: widget.isLeftDone ? StringConst.done : StringConst.undone,
+                colorList: widget.task.taskType.colorList,
+              ),
               Material(
                 color: Colors.transparent,
                 borderRadius: const RadiusConst.smallAll(),
                 child: InkWell(
                   borderRadius: const RadiusConst.smallAll(),
                   onLongPress: () {
-                    openSelectionMode(context);
+                    openSelectionMode();
                   },
-                  splashColor:
-                      Color(task.taskType.colorList.first).withOpacity(0.18),
+                  splashColor: Color(widget.task.taskType.colorList.first)
+                      .withOpacity(0.18),
                   child: Ink(),
                 ),
               ),
               GradientContainerButton(
                 onPressed: () {
                   selectRemove();
+                  controller.jumpToPage(1);
                 },
                 text: StringConst.remove.toUpperCase(),
-                type: TaskType.removeType,
+                colorList: TaskType.removeType.colorList,
               ),
             ],
           ),

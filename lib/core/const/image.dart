@@ -1,6 +1,16 @@
 class ImageConst {
   const ImageConst._();
 
+  static const String backgroundPath = 'assets/svg/background.svg';
+
+  static const String addIconPath = 'assets/svg/add.svg';
+  static const String calendarIconPath = 'assets/svg/calendar.svg';
+  static const String doneWhiteIconPath = 'assets/svg/done_white.svg';
+  static const String doneTaskListIconPath = 'assets/svg/done_task_list.svg';
+  static const String cancelIconPath = 'assets/svg/cancel.svg';
+  static const String doubleDoneIconPath = 'assets/svg/double_done.svg';
+  static const String backwardIconPath = 'assets/svg/backward.svg';
+
   static const String shoppingIconPath = 'assets/svg/shopping.svg';
   static const String gymIconPath = 'assets/svg/gym.svg';
   static const String locationIconPath = 'assets/svg/location.svg';

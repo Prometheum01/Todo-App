@@ -1,0 +1,9 @@
+<svg id="Group_4" data-name="Group 4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.881" y1="0.123" x2="0.677" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fea64c"/>
+      <stop offset="1" stop-color="#fe1e9a"/>
+    </linearGradient>
+  </defs>
+  <path id="Path_5" data-name="Path 5" d="M22.955,2.5H21.081V1.8a1.767,1.767,0,0,0-1.8-1.8,1.816,1.816,0,0,0-1.8,1.8V2.42h-8.9V1.8A1.8,1.8,0,1,0,5,1.8V2.42H3.045A3.226,3.226,0,0,0,0,5.544l.078,17.1A3.344,3.344,0,0,0,3.2,26H22.8a3.4,3.4,0,0,0,3.123-3.357L26,5.544A3.049,3.049,0,0,0,22.955,2.5Zm-.547,11.087v8.12a.616.616,0,0,1-.625.625H4.294a.616.616,0,0,1-.625-.625v-8.12ZM6.793,8.667a1.834,1.834,0,0,0,1.8-1.874V6.168h8.745v.625a1.816,1.816,0,0,0,1.8,1.8,1.957,1.957,0,0,0,1.952-1.8V6.168h.7a.616.616,0,0,1,.625.625v3.2H3.67v-3.2a.616.616,0,0,1,.625-.625H5v.625A1.834,1.834,0,0,0,6.793,8.667Z" fill="url(#linear-gradient)"/>
+</svg>

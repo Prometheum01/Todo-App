@@ -16,4 +16,30 @@ abstract class TaskListViewModel extends State<TaskListView> {
     context.read<NewTaskCubit>().clearCubit();
     Scaffold.of(context).openEndDrawer();
   }
+
+  closeSelectionMode() {
+    context.read<TaskBloc>().add(LoadTask());
+  }
+
+  openSelectionMode() {
+    context.read<TaskBloc>().emit(TaskSelection(
+        selectedTaskList: const [],
+        waitingTaskList:
+            (context.read<TaskBloc>().state as TaskLoaded).waitingTaskList,
+        doneTaskList:
+            (context.read<TaskBloc>().state as TaskLoaded).doneTaskList));
+  }
+
+  addAllDone() {
+    context.read<TaskBloc>().add(
+          DoneTask(
+            taskList: (context.read<TaskBloc>().state as TaskSelection)
+                .selectedTaskList,
+          ),
+        );
+  }
+
+  openCalendarPage() {}
+
+  openDonePage() {}
 }

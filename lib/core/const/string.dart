@@ -23,5 +23,6 @@ class StringConst {
   static const timePm = 'pm';
 
   static const done = 'done';
+  static const undone = 'undone';
   static const remove = 'remove';
 }

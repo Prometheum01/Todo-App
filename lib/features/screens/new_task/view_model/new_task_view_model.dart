@@ -28,7 +28,7 @@ abstract class NewTaskViewModel extends State<NewTaskView> {
               title: titleController.text,
               description: descriptionController.text);
 
-      context.read<TaskBloc>().add(AddNewTask(newTask: newTask));
+      context.read<TaskBloc>().add(AddNewTask(newTaskList: [newTask]));
 
       Navigator.of(context).pop();
     }
