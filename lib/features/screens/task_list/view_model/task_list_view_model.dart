@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
+import 'package:todo_app/core/services/bloc/slide_cubit/cubit/slide_cubit.dart';
 import 'package:todo_app/features/screens/done_task/view/done_task_view.dart';
 
 import '../../../../core/services/bloc/task_bloc/bloc/task_bloc.dart';
@@ -52,6 +53,7 @@ abstract class TaskListViewModel extends State<TaskListView> {
   void openCalendarPage() {}
 
   void openDonePage() {
+    context.read<SlideCubit>().removeSliderTask();
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => const DoneTaskView(),
     ));

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
+import 'package:todo_app/core/services/bloc/slide_cubit/cubit/slide_cubit.dart';
 import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
 import 'package:todo_app/core/services/database/task_hive.dart';
 import 'package:todo_app/features/screens/task_list/view/task_list_view.dart';
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => NewTaskCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SlideCubit(),
         ),
       ],
       child: MaterialApp(

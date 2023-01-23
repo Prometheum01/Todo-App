@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kartal/kartal.dart';
 import 'package:todo_app/product/widgets/task_tile/task_tile_view.dart';
 
 import '../../../core/services/bloc/task_bloc/bloc/task_bloc.dart';
 
 abstract class TaskTileViewModel extends State<TaskTile> {
-  final PageController controller = PageController(initialPage: 1);
+  late PageController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = PageController(initialPage: 1);
+  }
 
   selectDone() {
     context.read<TaskBloc>().add(DoneTask(taskList: [widget.task]));
