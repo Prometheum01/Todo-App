@@ -16,10 +16,12 @@ class MainTile extends StatelessWidget {
     Key? key,
     required this.task,
     this.isSelectionMode = false,
+    required this.isDonePage,
   }) : super(key: key);
 
   final Task task;
   final bool isSelectionMode;
+  final bool isDonePage;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class MainTile extends StatelessWidget {
           children: [
             Expanded(
               flex: 1,
-              child: TaskTypeCircle(type: task.taskType),
+              child: TaskTypeCircle(type: task.taskType, isDone: isDonePage),
             ),
             Expanded(
               flex: 7,

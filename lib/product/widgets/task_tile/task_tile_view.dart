@@ -32,7 +32,10 @@ class _TaskTileState extends TaskTileViewModel {
       height: context.dynamicHeight(0.1),
       child: Stack(
         children: [
-          MainTile(task: widget.task, isSelectionMode: false),
+          MainTile(
+              task: widget.task,
+              isSelectionMode: false,
+              isDonePage: !widget.isLeftDone),
           PageView(
             controller: controller,
             children: [

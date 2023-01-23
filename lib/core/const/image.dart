@@ -18,4 +18,6 @@ class ImageConst {
   static const String partyIconPath = 'assets/svg/party.svg';
   static const String sportIconPath = 'assets/svg/sport.svg';
   static const String doneIconPath = 'assets/svg/done.svg';
+  static const String doneTickIconPath = 'assets/svg/done_tick.svg';
+  static const String doubleUndoneIconPath = 'assets/svg/double_undone.svg';
 }

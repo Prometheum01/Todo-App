@@ -80,6 +80,7 @@ class _DoneTaskViewState extends DoneTaskViewModel {
                       itemBuilder: (context, index) => MainTile(
                         task: list[index],
                         isSelectionMode: true,
+                        isDonePage: true,
                       ),
                     ),
                     Align(
@@ -100,7 +101,7 @@ class _DoneTaskViewState extends DoneTaskViewModel {
                               },
                             ),
                             GradientIconButton(
-                              iconPath: ImageConst.doubleDoneIconPath,
+                              iconPath: ImageConst.doubleUndoneIconPath,
                               colorList: const [
                                 Color(ColorConst.palatinateBlue),
                                 Color(ColorConst.deepPink),

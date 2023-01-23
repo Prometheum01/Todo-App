@@ -122,6 +122,7 @@ class _TaskListViewState extends TaskListViewModel {
                       itemBuilder: (context, index) => MainTile(
                         task: list[index],
                         isSelectionMode: true,
+                        isDonePage: false,
                       ),
                     ),
                     Align(
