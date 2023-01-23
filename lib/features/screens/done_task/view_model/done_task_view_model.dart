@@ -17,4 +17,13 @@ abstract class DoneTaskViewModel extends State<DoneTaskView> {
           ),
         );
   }
+
+  void removeAll() {
+    context.read<TaskBloc>().add(
+          DeleteTaskList(
+              taskList: (context.read<TaskBloc>().state as TaskSelection)
+                  .selectedTaskList,
+              isInDoneDb: true),
+        );
+  }
 }

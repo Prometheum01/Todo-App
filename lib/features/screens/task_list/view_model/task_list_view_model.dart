@@ -40,6 +40,15 @@ abstract class TaskListViewModel extends State<TaskListView> {
         );
   }
 
+  void removeAll() {
+    context.read<TaskBloc>().add(
+          DeleteTaskList(
+              taskList: (context.read<TaskBloc>().state as TaskSelection)
+                  .selectedTaskList,
+              isInDoneDb: false),
+        );
+  }
+
   void openCalendarPage() {}
 
   void openDonePage() {

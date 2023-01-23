@@ -111,6 +111,17 @@ class _DoneTaskViewState extends DoneTaskViewModel {
                                 addAllUndone();
                               },
                             ),
+                            GradientIconButton(
+                              iconPath: ImageConst.removeIconPath,
+                              colorList: const [
+                                Colors.white,
+                                Colors.white,
+                              ],
+                              onPressed: () {
+                                //remove all
+                                removeAll();
+                              },
+                            ),
                           ],
                         ),
                       ),

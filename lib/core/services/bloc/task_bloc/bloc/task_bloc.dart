@@ -113,27 +113,64 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       if (state is TaskLoaded) {
         final state = this.state as TaskLoaded;
         if (!event.isInDoneDb) {
-          for (Task task in event.taskList) {
-            print(state.waitingTaskList.length);
-            if (state.waitingTaskList.contains(task)) {
-              state.waitingTaskList.remove(task);
-            }
-            print(state.waitingTaskList.length);
+          List<Task> taskList = List.of(state.waitingTaskList).toList();
+          if (taskList.contains(event.task)) {
+            taskList.remove(event.task);
           }
+
+          emit(
+            TaskLoaded(
+                waitingTaskList: taskList, doneTaskList: state.doneTaskList),
+          );
+          TaskHive(dbKey: waitingTaskDbKey).deleteTask([event.task]);
+        } else {
+          List<Task> taskList = List.of(state.doneTaskList).toList();
+          if (taskList.contains(event.task)) {
+            taskList.remove(event.task);
+          }
+
+          emit(
+            TaskLoaded(
+                waitingTaskList: state.waitingTaskList, doneTaskList: taskList),
+          );
+          TaskHive(dbKey: doneTaskDbKey).deleteTask([event.task]);
+        }
+      }
+    });
+
+    on<DeleteTaskList>((event, emit) {
+      if (state is TaskSelection) {
+        final state = this.state as TaskSelection;
+        if (!event.isInDoneDb) {
+          List<Task> taskList = List.of(state.waitingTaskList).toList();
+
+          for (Task task in event.taskList) {
+            if (taskList.contains(task)) {
+              taskList.remove(task);
+            }
+          }
+
+          emit(
+            TaskLoaded(
+                waitingTaskList: taskList, doneTaskList: state.doneTaskList),
+          );
           TaskHive(dbKey: waitingTaskDbKey).deleteTask(event.taskList);
         } else {
+          List<Task> taskList = List.of(state.doneTaskList).toList();
+
           for (Task task in event.taskList) {
-            if (state.doneTaskList.contains(task)) {
-              state.doneTaskList.remove(task);
+            if (taskList.contains(task)) {
+              taskList.remove(task);
             }
           }
+
+          emit(
+            TaskLoaded(
+                waitingTaskList: state.waitingTaskList, doneTaskList: taskList),
+          );
+
           TaskHive(dbKey: doneTaskDbKey).deleteTask(event.taskList);
         }
-        emit(
-          TaskLoaded(
-              waitingTaskList: state.waitingTaskList,
-              doneTaskList: state.doneTaskList),
-        );
       }
     });
 

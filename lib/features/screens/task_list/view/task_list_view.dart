@@ -153,6 +153,17 @@ class _TaskListViewState extends TaskListViewModel {
                                 addAllDone();
                               },
                             ),
+                            GradientIconButton(
+                              iconPath: ImageConst.removeIconPath,
+                              colorList: const [
+                                Colors.white,
+                                Colors.white,
+                              ],
+                              onPressed: () {
+                                //remove all
+                                removeAll();
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -272,7 +283,14 @@ class GradientIconButton extends StatelessWidget {
             ]),
         child: Padding(
           padding: const PaddingConst.mediumAll(),
-          child: SvgPicture.asset(iconPath),
+          child: SizedBox(
+            height: context.dynamicHeight(0.05),
+            width: context.dynamicWidth(0.05),
+            child: SvgPicture.asset(
+              iconPath,
+              fit: BoxFit.contain,
+            ),
+          ),
         ),
       ),
     );

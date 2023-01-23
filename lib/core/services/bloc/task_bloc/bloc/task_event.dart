@@ -37,10 +37,20 @@ class UndoneTask extends TaskEvent {
 }
 
 class DeleteTask extends TaskEvent {
+  final Task task;
+  final bool isInDoneDb;
+
+  const DeleteTask({required this.task, required this.isInDoneDb});
+
+  @override
+  List<Object> props() => [task, isInDoneDb];
+}
+
+class DeleteTaskList extends TaskEvent {
   final List<Task> taskList;
   final bool isInDoneDb;
 
-  const DeleteTask({required this.taskList, this.isInDoneDb = true});
+  const DeleteTaskList({required this.taskList, required this.isInDoneDb});
 
   @override
   List<Object> props() => [taskList, isInDoneDb];
