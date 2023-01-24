@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kartal/kartal.dart';
+import 'package:todo_app/core/const/string.dart';
 import 'package:todo_app/features/screens/done_task/view_model/done_task_view_model.dart';
-import 'package:todo_app/features/screens/task_list/view/task_list_view.dart';
 import 'package:todo_app/product/model/task/task.dart';
+import 'package:todo_app/product/widgets/error_animation.dart';
+import 'package:todo_app/product/widgets/loading_animation.dart';
 
 import '../../../../core/const/color.dart';
 import '../../../../core/const/image.dart';
 import '../../../../core/const/padding.dart';
 import '../../../../core/services/bloc/task_bloc/bloc/task_bloc.dart';
+import '../../../../product/widgets/circle_button_row.dart';
+import '../../../../product/widgets/custom_background.dart';
+import '../../../../product/widgets/gradient_icon_button.dart';
 import '../../../../product/widgets/task_tile/main_tile.dart';
 import '../../../../product/widgets/task_tile/task_tile_view.dart';
 
@@ -28,12 +33,12 @@ class _DoneTaskViewState extends DoneTaskViewModel {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
-            'DONE TASKS',
+            StringConst.doneTasks.toUpperCase(),
             style: context.textTheme.headline2,
           ),
           leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              closePage();
             },
             icon: SvgPicture.asset(
               ImageConst.backwardIconPath,
@@ -46,26 +51,21 @@ class _DoneTaskViewState extends DoneTaskViewModel {
           child: BlocBuilder<TaskBloc, TaskState>(
             builder: (context, state) {
               if (state is TaskLoading) {
-                //TODO:Loading widget will add
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: LoadingAnimation(),
                 );
               }
 
               if (state is TaskLoaded) {
                 List<Task> list = state.doneTaskList;
-                return Stack(
-                  children: [
-                    ListView.separated(
-                      itemCount: list.length,
-                      separatorBuilder: (context, index) => const Padding(
-                          padding: PaddingConst.smallSymmetricVertical()),
-                      itemBuilder: (context, index) => TaskTile(
-                        task: list[index],
-                        isLeftDone: false,
-                      ),
-                    ),
-                  ],
+                return ListView.separated(
+                  itemCount: list.length,
+                  separatorBuilder: (context, index) => const Padding(
+                      padding: PaddingConst.smallSymmetricVertical()),
+                  itemBuilder: (context, index) => TaskTile(
+                    task: list[index],
+                    isLeftDone: false,
+                  ),
                 );
               }
 
@@ -130,10 +130,8 @@ class _DoneTaskViewState extends DoneTaskViewModel {
                 );
               }
 
-              //TODO:Error widget will add
-
               return const Center(
-                child: Text('Something get wrong...'),
+                child: ErrorAnimation(),
               );
             },
           ),

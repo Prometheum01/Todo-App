@@ -29,9 +29,11 @@ dependencies:
 
   #Image
   flutter_svg: ^1.1.6
+  lottie: ^2.2.0
 
   #Font
   google_fonts: ^3.0.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +53,7 @@ flutter:
 
   assets:
     - assets/svg/
+    - assets/animation/
   #   - images/a_dot_ham.jpeg
 
   # fonts:

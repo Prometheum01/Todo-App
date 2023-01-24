@@ -25,21 +25,27 @@ class GradientContainerButton extends StatelessWidget {
         onTap: () {
           onPressed();
         },
-        splashColor: Color(colorList[0]),
+        splashColor: Color(colorList.first),
         child: Ink(
           decoration: BoxDecoration(
             borderRadius: const RadiusConst.smallAll(),
             gradient: LinearGradient(
-              colors: [Color(colorList[0]), Color(colorList[1])],
+              colors: [
+                Color(colorList.first),
+                Color(
+                  colorList.last,
+                ),
+              ],
             ),
           ),
           child: Center(
             child: Text(
-              text,
+              text.toCapitalized(),
               style: context.textTheme.headline2?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24),
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                fontSize: 24,
+              ),
             ),
           ),
         ),

@@ -10,7 +10,6 @@ import '../../model/task/task.dart';
 import '../../model/task_type/task_type.dart';
 
 import '../widgets.dart';
-import 'main_tile.dart';
 
 class TaskTile extends StatefulWidget {
   const TaskTile({
@@ -35,9 +34,10 @@ class _TaskTileState extends TaskTileViewModel {
       child: Stack(
         children: [
           MainTile(
-              task: widget.task,
-              isSelectionMode: false,
-              isDonePage: !widget.isLeftDone),
+            task: widget.task,
+            isSelectionMode: false,
+            isDonePage: !widget.isLeftDone,
+          ),
           BlocBuilder<SlideCubit, SlideState>(
             builder: (context, state) {
               if (state is SliderSelected) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class RadiusConst extends BorderRadius {
   static const double _small = 8;
+  // ignore: unused_field
   static const double _medium = 12;
   static const double _large = 16;
   static const double _xLarge = 24;

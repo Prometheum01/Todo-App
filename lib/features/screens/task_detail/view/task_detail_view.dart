@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/const/color.dart';
+import 'package:todo_app/core/const/decoration.dart';
 import 'package:todo_app/core/const/padding.dart';
-import 'package:todo_app/core/const/radius.dart';
+
 import 'package:todo_app/core/const/string.dart';
 import 'package:todo_app/features/screens/task_detail/view_model/task_detail_view_model.dart';
 import 'package:todo_app/product/model/task/task.dart';
-import 'package:todo_app/product/widgets/custom_gradient_button.dart';
 import 'package:todo_app/product/widgets/widgets.dart';
+
+part 'package:todo_app/features/screens/task_detail/components/title.dart';
+part 'package:todo_app/features/screens/task_detail/components/date_time.dart';
+part 'package:todo_app/features/screens/task_detail/components/description.dart';
+part 'package:todo_app/features/screens/task_detail/components/description_title.dart';
 
 class TaskDetailView extends StatefulWidget {
   const TaskDetailView({super.key, required this.task});
@@ -19,19 +24,10 @@ class TaskDetailView extends StatefulWidget {
 }
 
 class _TaskDetailViewState extends TaskDetailViewModel {
-  late final Task task;
-
-  @override
-  void initState() {
-    super.initState();
-    task = widget.task;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          color: Colors.white, borderRadius: RadiusConst.smallAll()),
+      decoration: const BoxDecorationConst.whiteRounded(),
       child: Padding(
         padding: const PaddingConst.largeAll(),
         child: Column(
@@ -40,42 +36,18 @@ class _TaskDetailViewState extends TaskDetailViewModel {
             GradientIconCircle(type: task.taskType),
             Padding(
               padding: const PaddingConst.smallTopMediumBottom(),
-              child: Text(
-                task.title,
-                style: context.textTheme.headline1,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-              ),
+              child: _Title(text: task.title),
             ),
-            RichText(
-              text: TextSpan(
-                text: '${task.date.formatDate}  ',
-                style: context.textTheme.headline4,
-                children: [
-                  TextSpan(
-                    text: task.time.formatTime,
-                    style: context.textTheme.headline6?.copyWith(fontSize: 12),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const PaddingConst.largeSymmetricVertical(),
-              child: Text(
-                StringConst.description.toCapitalized(),
-                style: context.textTheme.headline4
-                    ?.copyWith(fontWeight: FontWeight.w900),
-              ),
+            _DateTime(date: task.date.formatDate, time: task.time.formatTime),
+            const Padding(
+              padding: PaddingConst.largeSymmetricVertical(),
+              child: _DescriptionTitle(),
             ),
             Flexible(
               child: SizedBox(
                 width: double.infinity,
-                child: Text(
-                  task.description,
-                  style: context.textTheme.headline3?.copyWith(
-                    color: const Color(ColorConst.descriptionColor),
-                  ),
-                  textAlign: TextAlign.center,
+                child: _Description(
+                  description: task.description,
                 ),
               ),
             ),
@@ -83,7 +55,7 @@ class _TaskDetailViewState extends TaskDetailViewModel {
               padding: const PaddingConst.xLargeTop(),
               child: GradientButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  closePage();
                 },
                 text: StringConst.done.toUpperCase(),
                 colorList: [

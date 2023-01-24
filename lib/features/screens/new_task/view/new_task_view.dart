@@ -10,7 +10,6 @@ import 'package:todo_app/core/extension/date_time.dart';
 import 'package:todo_app/core/extension/time_of_day.dart';
 import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
 import 'package:todo_app/features/screens/new_task/view_model/new_task_view_model.dart';
-import 'package:todo_app/product/widgets/custom_gradient_button.dart';
 
 import '../../../../product/model/task_type/task_type.dart';
 import '../../../../product/widgets/widgets.dart';

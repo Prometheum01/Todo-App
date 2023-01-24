@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
 class PaddingConst extends EdgeInsets {
+  static const double _xSmall = 4;
   static const double _small = 8;
   static const double _medium = 12;
   static const double _large = 16;
   static const double _xLarge = 24;
 
   //All
+  const PaddingConst.xSmallAll() : super.all(_xSmall);
   const PaddingConst.smallAll() : super.all(_small);
   const PaddingConst.mediumAll() : super.all(_medium);
   const PaddingConst.largeAll() : super.all(_large);
   const PaddingConst.xLargeAll() : super.all(_xLarge);
 
   //Symmetric
+
   const PaddingConst.smallSymmetricVertical()
       : super.symmetric(vertical: _small);
   const PaddingConst.mediumSymmetricVertical()
@@ -22,6 +25,8 @@ class PaddingConst extends EdgeInsets {
   const PaddingConst.xLargeSymmetricVertical()
       : super.symmetric(vertical: _xLarge);
 
+  const PaddingConst.xSmallSymmetricHorizontal()
+      : super.symmetric(horizontal: _xSmall);
   const PaddingConst.smallSymmetricHorizontal()
       : super.symmetric(horizontal: _small);
   const PaddingConst.mediumSymmetricHorizontal()

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:todo_app/core/const/color.dart';
+import 'package:todo_app/core/const/string.dart';
 
 import '../../../core/const/image.dart';
 
@@ -22,44 +23,45 @@ class TaskType extends Equatable {
 
   static List<TaskType> get taskList => [
         const TaskType(
-          name: 'Shopping',
+          name: StringConst.shopping,
           iconPath: ImageConst.shoppingIconPath,
           colorList: [ColorConst.deepPink, ColorConst.yellowOrange],
         ),
         const TaskType(
-          name: 'Sport',
+          name: StringConst.sport,
           iconPath: ImageConst.sportIconPath,
           colorList: [ColorConst.deepPink, ColorConst.palatinateBlue],
         ),
         const TaskType(
-          name: 'Location',
+          name: StringConst.location,
           iconPath: ImageConst.locationIconPath,
           colorList: [ColorConst.palatinateBlue, ColorConst.yankeesBlue],
         ),
         const TaskType(
-          name: 'Party',
+          name: StringConst.party,
           iconPath: ImageConst.partyIconPath,
           colorList: [ColorConst.palatinateBlue, ColorConst.aqua],
         ),
         const TaskType(
-          name: 'Gym',
+          name: StringConst.gym,
           iconPath: ImageConst.gymIconPath,
           colorList: [ColorConst.deepPink, ColorConst.palatinateBlue],
         ),
         const TaskType(
-          name: 'Other',
+          name: StringConst.other,
           iconPath: ImageConst.otherIconPath,
           colorList: [ColorConst.yankeesBlue, ColorConst.romanSilver],
         ),
       ];
 
   static TaskType get removeType => const TaskType(
-        name: 'Remove',
+        name: StringConst.remove,
         iconPath: '',
         colorList: [ColorConst.deepPink, ColorConst.redCrayola],
       );
+
   static TaskType get emptyType => const TaskType(
-        name: 'Empty',
+        name: StringConst.empty,
         iconPath: '',
         colorList: [0x00FFFFFF, 0x00FFFFFF],
       );

@@ -38,11 +38,11 @@ class _TaskDescriptionField extends StatelessWidget {
             validator: (value) {
               if (value != null) {
                 if (value.trim().isEmpty) {
-                  return 'Please fill this field!';
+                  return StringConst.textFieldError;
                 }
                 return null;
               }
-              return 'Please fill this field!';
+              return StringConst.textFieldError;
             },
           ),
         ),

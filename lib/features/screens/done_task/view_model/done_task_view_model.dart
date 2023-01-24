@@ -5,6 +5,10 @@ import '../../../../core/services/bloc/task_bloc/bloc/task_bloc.dart';
 import '../view/done_task_view.dart';
 
 abstract class DoneTaskViewModel extends State<DoneTaskView> {
+  void closePage() {
+    Navigator.of(context).pop();
+  }
+
   void closeSelectionMode() {
     context.read<TaskBloc>().add(LoadTask());
   }

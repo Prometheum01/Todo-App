@@ -17,7 +17,7 @@ abstract class NewTaskViewModel extends State<NewTaskView> {
     descriptionController = TextEditingController();
   }
 
-  addNewTask() {
+  void addNewTask() {
     if (validatorKey.currentState!.validate()) {
       Task newTask = (context.read<NewTaskCubit>().state as NewTaskFilling)
           .newTask

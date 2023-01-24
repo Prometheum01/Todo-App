@@ -21,4 +21,9 @@ class ImageConst {
   static const String doneTickIconPath = 'assets/svg/done_tick.svg';
   static const String doubleUndoneIconPath = 'assets/svg/double_undone.svg';
   static const String removeIconPath = 'assets/svg/remove.svg';
+
+  static const String errorAnimationPath =
+      'assets/animation/error_animation.json';
+  static const String loadingAnimationPath =
+      'assets/animation/loading_animation.json';
 }

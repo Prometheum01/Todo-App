@@ -40,8 +40,8 @@ class TaskTypeButton extends StatelessWidget {
                       shape: BoxShape.circle,
                       gradient: LinearGradient(
                         colors: [
-                          Color(type.colorList[0]),
-                          Color(type.colorList[1])
+                          Color(type.colorList.first),
+                          Color(type.colorList.last),
                         ],
                       ),
                     ),
@@ -55,8 +55,8 @@ class TaskTypeButton extends StatelessWidget {
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
                     colors: [
-                      Color(type.colorList[0]),
-                      Color(type.colorList[1]),
+                      Color(type.colorList.first),
+                      Color(type.colorList.last),
                     ],
                   ),
                 ),
