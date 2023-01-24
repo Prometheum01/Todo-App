@@ -92,6 +92,9 @@ class _TaskTileState extends TaskTileViewModel {
                       onLongPress: () {
                         openSelectionMode();
                       },
+                      onTap: () {
+                        openDetailSheet();
+                      },
                       splashColor: Color(widget.task.taskType.colorList.first)
                           .withOpacity(0.18),
                       child: Ink(),

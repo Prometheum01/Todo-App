@@ -10,6 +10,7 @@ import 'package:todo_app/core/extension/date_time.dart';
 import 'package:todo_app/core/extension/time_of_day.dart';
 import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
 import 'package:todo_app/features/screens/new_task/view_model/new_task_view_model.dart';
+import 'package:todo_app/product/widgets/custom_gradient_button.dart';
 
 import '../../../../product/model/task_type/task_type.dart';
 import '../../../../product/widgets/widgets.dart';
@@ -18,7 +19,6 @@ part 'package:todo_app/features/screens/new_task/components/title.dart';
 part 'package:todo_app/features/screens/new_task/components/task_type_list.dart';
 part 'package:todo_app/features/screens/new_task/components/time_field.dart';
 part 'package:todo_app/features/screens/new_task/components/date_field.dart';
-part 'package:todo_app/features/screens/new_task/components/add_button.dart';
 part 'package:todo_app/features/screens/new_task/components/underline.dart';
 part 'package:todo_app/features/screens/new_task/components/description_field.dart';
 part 'package:todo_app/features/screens/new_task/components/title_field.dart';
@@ -66,10 +66,14 @@ class _NewTaskViewState extends NewTaskViewModel {
                   const Flexible(flex: 1, child: _TaskTimeField()),
                   Flexible(
                     flex: 1,
-                    child: _AddButton(
-                      onPressed: () {
-                        addNewTask();
-                      },
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: GradientButton(
+                        onPressed: () {
+                          addNewTask();
+                        },
+                        text: StringConst.addTask.toCapitalized(),
+                      ),
                     ),
                   )
                 ],

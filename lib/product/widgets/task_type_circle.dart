@@ -41,26 +41,40 @@ class TaskTypeCircle extends StatelessWidget {
                   ),
                 ),
         ),
-        Container(
-          height: context.dynamicHeight(0.075),
-          width: context.dynamicWidth(0.075),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: LinearGradient(
-              colors: [
-                Color(type.colorList[0]),
-                Color(type.colorList[1]),
-              ],
-            ),
-          ),
-          child: Padding(
-            padding: const PaddingConst.smallAll(),
-            child: SvgPicture.asset(
-              type.iconPath,
-            ),
-          ),
-        ),
+        GradientIconCircle(type: type),
       ],
+    );
+  }
+}
+
+class GradientIconCircle extends StatelessWidget {
+  const GradientIconCircle({
+    Key? key,
+    required this.type,
+  }) : super(key: key);
+
+  final TaskType type;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: context.dynamicHeight(0.075),
+      width: context.dynamicWidth(0.075),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+          colors: [
+            Color(type.colorList[0]),
+            Color(type.colorList[1]),
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: const PaddingConst.smallAll(),
+        child: SvgPicture.asset(
+          type.iconPath,
+        ),
+      ),
     );
   }
 }

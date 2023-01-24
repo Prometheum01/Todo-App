@@ -38,6 +38,10 @@ class MyApp extends StatelessWidget {
               elevation: 0,
               centerTitle: true),
           textTheme: TextTheme(
+              headline1: GoogleFonts.lato().copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.black),
               headline2: GoogleFonts.baloo2().copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.normal,

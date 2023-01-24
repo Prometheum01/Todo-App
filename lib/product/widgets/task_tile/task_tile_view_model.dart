@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
+import 'package:todo_app/core/const/padding.dart';
+import 'package:todo_app/features/screens/task_detail/view/task_detail_view.dart';
 import 'package:todo_app/product/widgets/task_tile/task_tile_view.dart';
 
 import '../../../core/services/bloc/task_bloc/bloc/task_bloc.dart';
@@ -23,6 +25,21 @@ abstract class TaskTileViewModel extends State<TaskTile> {
           task: widget.task,
           isInDoneDb: !widget.isLeftDone,
         ));
+  }
+
+  openDetailSheet() {
+    showDialog(
+      context: context,
+      builder: (context) => Center(
+        child: SizedBox(
+          height: context.dynamicHeight(0.6),
+          child: Padding(
+            padding: const PaddingConst.mediumSymmetricHorizontal(),
+            child: TaskDetailView(task: widget.task),
+          ),
+        ),
+      ),
+    );
   }
 
   openSelectionMode() {

@@ -11,4 +11,5 @@ class ColorConst {
   static const int romanSilver = 0xFF88889F;
 
   static const int background = 0xFFCAEBFE;
+  static const int descriptionColor = 0xFF95989A;
 }
