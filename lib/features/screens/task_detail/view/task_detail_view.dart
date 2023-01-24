@@ -23,7 +23,6 @@ class _TaskDetailViewState extends TaskDetailViewModel {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     task = widget.task;
   }
@@ -40,7 +39,7 @@ class _TaskDetailViewState extends TaskDetailViewModel {
           children: [
             GradientIconCircle(type: task.taskType),
             Padding(
-              padding: const EdgeInsets.only(top: 4, bottom: 8),
+              padding: const PaddingConst.smallTopMediumBottom(),
               child: Text(
                 task.title,
                 style: context.textTheme.headline1,
@@ -61,7 +60,7 @@ class _TaskDetailViewState extends TaskDetailViewModel {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 16),
+              padding: const PaddingConst.largeSymmetricVertical(),
               child: Text(
                 StringConst.description.toCapitalized(),
                 style: context.textTheme.headline4
@@ -81,14 +80,12 @@ class _TaskDetailViewState extends TaskDetailViewModel {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                top: 24,
-              ),
+              padding: const PaddingConst.xLargeTop(),
               child: GradientButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                text: 'DONE',
+                text: StringConst.done.toUpperCase(),
                 colorList: [
                   Color(task.taskType.colorList.first),
                   Color(task.taskType.colorList.last),

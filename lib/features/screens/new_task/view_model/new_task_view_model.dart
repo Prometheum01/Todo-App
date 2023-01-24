@@ -18,15 +18,14 @@ abstract class NewTaskViewModel extends State<NewTaskView> {
   }
 
   addNewTask() {
-    //Add Bloc List
-    //Add Hive
-
     if (validatorKey.currentState!.validate()) {
       Task newTask = (context.read<NewTaskCubit>().state as NewTaskFilling)
           .newTask
           .copyWith(
-              title: titleController.text,
-              description: descriptionController.text);
+            title: titleController.text,
+            description: descriptionController.text,
+            createdTime: DateTime.now().toString(),
+          );
 
       context.read<TaskBloc>().add(AddNewTask(newTaskList: [newTask]));
 

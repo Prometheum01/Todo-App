@@ -27,12 +27,16 @@ class Task extends Equatable {
   @HiveField(5)
   final bool isDone;
 
+  @HiveField(6)
+  final String createdTime;
+
   const Task({
     required this.taskType,
     required this.title,
     required this.description,
     required this.date,
     required this.time,
+    required this.createdTime,
     this.isDone = false,
   });
 
@@ -40,6 +44,7 @@ class Task extends Equatable {
         taskType: TaskType.taskList.first,
         title: '',
         description: '',
+        createdTime: DateTime.now().toString(),
         date: TaskDate(
             year: DateTime.now().year,
             month: DateTime.now().month,
@@ -56,6 +61,7 @@ class Task extends Equatable {
     String? description,
     TaskDate? date,
     TaskTime? time,
+    String? createdTime,
     bool? isDone,
   }) {
     return Task(
@@ -64,10 +70,12 @@ class Task extends Equatable {
       description: description ?? this.description,
       date: date ?? this.date,
       time: time ?? this.time,
+      createdTime: createdTime ?? this.createdTime,
       isDone: isDone ?? this.isDone,
     );
   }
 
   @override
-  List<Object?> props() => [taskType, title, description, date, time, isDone];
+  List<Object?> props() =>
+      [taskType, title, description, date, time, createdTime, isDone];
 }
