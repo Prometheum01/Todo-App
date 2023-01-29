@@ -67,5 +67,5 @@ class TaskType extends Equatable {
       );
 
   @override
-  List<Object?> props() => [name, iconPath, colorList];
+  List<Object?> get props => [name, iconPath, colorList];
 }

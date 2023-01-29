@@ -27,7 +27,7 @@ class _TaskDetailViewState extends TaskDetailViewModel {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecorationConst.whiteRounded(),
+      decoration: BoxDecorationConst.whiteRounded(),
       child: Padding(
         padding: const PaddingConst.largeAll(),
         child: Column(

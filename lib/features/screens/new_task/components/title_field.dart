@@ -17,16 +17,16 @@ class _TaskTitleField extends StatelessWidget {
       children: [
         Text(
           StringConst.title.toCapitalized(),
-          style: context.textTheme.headline5,
+          style: context.textTheme.bodyMedium,
         ),
         TextFormField(
           controller: _controller,
-          style: context.textTheme.headline4,
+          style: context.textTheme.headlineSmall,
           onFieldSubmitted: (value) {},
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             hintText: StringConst.titleHint.toCapitalized(),
-            hintStyle: context.textTheme.headline5,
+            hintStyle: context.textTheme.bodyMedium,
             focusedBorder: UnderlineBorderConst.greyField(),
             enabledBorder: UnderlineBorderConst.greyField(),
           ),

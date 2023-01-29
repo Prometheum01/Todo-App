@@ -9,7 +9,7 @@ class _Description extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       description,
-      style: context.textTheme.headline3?.copyWith(
+      style: context.textTheme.headlineMedium?.copyWith(
         color: const Color(ColorConst.descriptionColor),
       ),
       textAlign: TextAlign.center,

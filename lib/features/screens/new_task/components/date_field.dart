@@ -40,7 +40,7 @@ class _TaskDateField extends StatelessWidget {
         children: [
           Text(
             StringConst.date.toCapitalized(),
-            style: context.textTheme.headline5,
+            style: context.textTheme.headlineSmall,
           ),
           BlocBuilder<NewTaskCubit, NewTaskState>(
             builder: (context, state) {
@@ -56,7 +56,7 @@ class _TaskDateField extends StatelessWidget {
                         state is NewTaskFilling
                             ? state.newTask.date.formatDate
                             : StringConst.dateHint.toCapitalized(),
-                        style: context.textTheme.headline4,
+                        style: context.textTheme.headlineSmall,
                       ),
                     ),
                   ),

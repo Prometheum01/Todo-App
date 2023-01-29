@@ -76,6 +76,6 @@ class Task extends Equatable {
   }
 
   @override
-  List<Object?> props() =>
+  List<Object?> get props =>
       [taskType, title, description, date, time, createdTime, isDone];
 }

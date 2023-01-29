@@ -13,7 +13,7 @@ class _TaskTypeList extends StatelessWidget {
       children: [
         Text(
           StringConst.icon.toTitleCase(),
-          style: context.textTheme.headline5,
+          style: context.textTheme.bodyMedium,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -4,7 +4,7 @@ abstract class NewTaskState extends Equatable {
   const NewTaskState();
 
   @override
-  List<Object> props() => [];
+  List<Object> get props => [];
 }
 
 class NewTaskInitial extends NewTaskState {}
@@ -15,5 +15,5 @@ class NewTaskFilling extends NewTaskState {
   const NewTaskFilling({required this.newTask});
 
   @override
-  List<Object> props() => [newTask];
+  List<Object> get props => [newTask];
 }

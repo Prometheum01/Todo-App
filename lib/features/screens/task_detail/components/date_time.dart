@@ -10,11 +10,11 @@ class _DateTime extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: '$date  ',
-        style: context.textTheme.headline4,
+        style: context.textTheme.headlineSmall,
         children: [
           TextSpan(
             text: time,
-            style: context.textTheme.headline6?.copyWith(fontSize: 12),
+            style: context.textTheme.bodySmall?.copyWith(fontSize: 12),
           ),
         ],
       ),

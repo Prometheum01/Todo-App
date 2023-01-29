@@ -17,20 +17,20 @@ class _TaskDescriptionField extends StatelessWidget {
           padding: const PaddingConst.smallSymmetricVertical(),
           child: Text(
             StringConst.description.toCapitalized(),
-            style: context.textTheme.headline5,
+            style: context.textTheme.bodyMedium,
           ),
         ),
         Flexible(
           child: TextFormField(
             controller: _controller,
-            style: context.textTheme.headline4,
+            style: context.textTheme.headlineSmall,
             textAlignVertical: TextAlignVertical.top,
             expands: true,
             maxLines: null,
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
               hintText: StringConst.descriptionHint.toCapitalized(),
-              hintStyle: context.textTheme.headline5,
+              hintStyle: context.textTheme.bodyMedium,
               enabledBorder: OutlineBorderConst.descriptionField(),
               focusedBorder: OutlineBorderConst.descriptionField(),
               errorBorder: OutlineBorderConst.descriptionErrorField(),

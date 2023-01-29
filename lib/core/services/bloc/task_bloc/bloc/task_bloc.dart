@@ -34,21 +34,23 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       if (state is TaskLoaded) {
         final state = this.state as TaskLoaded;
 
-        for (Task task in event.taskList) {
-          if (state.waitingTaskList.contains(task)) {
-            state.waitingTaskList.remove(task);
-          }
+        if (state.waitingTaskList.contains(event.taskList.first)) {
+          state.waitingTaskList.remove(event.taskList.first);
         }
 
         emit(
           TaskLoaded(
             waitingTaskList: state.waitingTaskList,
-            doneTaskList: List.from(state.doneTaskList)..addAll(event.taskList),
+            doneTaskList: List.from(state.doneTaskList)
+              ..add(
+                event.taskList.first.copyWith(isDone: true),
+              ),
           ),
         );
 
         TaskHive(dbKey: waitingTaskDbKey).deleteTask(event.taskList);
-        await TaskHive(dbKey: doneTaskDbKey).addNewTask(event.taskList);
+        await TaskHive(dbKey: doneTaskDbKey)
+            .addNewTask([event.taskList.first.copyWith(isDone: true)]);
       } else if (state is TaskSelection) {
         final state = this.state as TaskSelection;
 
@@ -58,15 +60,18 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           }
         }
 
+        List<Task> changedList =
+            event.taskList.map((e) => e.copyWith(isDone: true)).toList();
+
         emit(
           TaskLoaded(
             waitingTaskList: state.waitingTaskList,
-            doneTaskList: List.from(state.doneTaskList)..addAll(event.taskList),
+            doneTaskList: List.from(state.doneTaskList)..addAll(changedList),
           ),
         );
 
         TaskHive(dbKey: waitingTaskDbKey).deleteTask(event.taskList);
-        await TaskHive(dbKey: doneTaskDbKey).addNewTask(event.taskList);
+        await TaskHive(dbKey: doneTaskDbKey).addNewTask(changedList);
       }
     });
 
@@ -74,19 +79,21 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       if (state is TaskLoaded) {
         final state = this.state as TaskLoaded;
 
-        for (Task task in event.taskList) {
-          if (state.doneTaskList.contains(task)) {
-            state.doneTaskList.remove(task);
-          }
+        Task task = event.taskList.first;
+
+        if (state.doneTaskList.contains(task)) {
+          state.doneTaskList.remove(task);
         }
 
         emit(
           TaskLoaded(
               waitingTaskList: List.from(state.waitingTaskList)
-                ..addAll(event.taskList),
+                ..add(task.copyWith(isDone: false)),
               doneTaskList: state.doneTaskList),
         );
-        await TaskHive(dbKey: waitingTaskDbKey).addNewTask(event.taskList);
+
+        await TaskHive(dbKey: waitingTaskDbKey)
+            .addNewTask([task.copyWith(isDone: false)]);
         TaskHive(dbKey: doneTaskDbKey).deleteTask(event.taskList);
       } else if (state is TaskSelection) {
         final state = this.state as TaskSelection;
@@ -97,15 +104,18 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           }
         }
 
+        List<Task> changedList =
+            event.taskList.map((e) => e.copyWith(isDone: false)).toList();
+
         emit(
           TaskLoaded(
               waitingTaskList: List.from(state.waitingTaskList)
-                ..addAll(event.taskList),
+                ..addAll(changedList),
               doneTaskList: state.doneTaskList),
         );
 
-        TaskHive(dbKey: waitingTaskDbKey).deleteTask(event.taskList);
-        await TaskHive(dbKey: doneTaskDbKey).addNewTask(event.taskList);
+        await TaskHive(dbKey: waitingTaskDbKey).addNewTask(changedList);
+        TaskHive(dbKey: doneTaskDbKey).deleteTask(event.taskList);
       }
     });
 

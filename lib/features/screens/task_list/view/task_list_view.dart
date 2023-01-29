@@ -30,7 +30,9 @@ class _TaskListViewState extends TaskListViewModel {
         appBar: _appBar(),
         backgroundColor: Colors.transparent,
         endDrawerEnableOpenDragGesture: false,
-        endDrawer: const NewTaskView(),
+        endDrawer: const Drawer(
+          child: NewTaskView(),
+        ),
         body: Padding(
           padding: const PaddingConst.mediumSymmetricHorizontal(),
           child: BlocBuilder<TaskBloc, TaskState>(
@@ -92,6 +94,7 @@ class _TaskListViewState extends TaskListViewModel {
                                     ],
                                     onPressed: () {
                                       //Open calendar page
+                                      openCalendarPage();
                                     },
                                   ),
                                   GradientIconButton(
@@ -162,12 +165,13 @@ class _TaskListViewState extends TaskListViewModel {
       automaticallyImplyLeading: false,
       title: Text(
         StringConst.todo.toUpperCase(),
-        style: context.textTheme.headline2,
+        style: context.textTheme.displayMedium,
       ),
       actions: [
         IconButton(
           onPressed: () {
             //Open done task page
+
             openDonePage();
           },
           icon: SvgPicture.asset(

@@ -4,7 +4,7 @@ abstract class TaskEvent extends Equatable {
   const TaskEvent();
 
   @override
-  List<Object> props() => [];
+  List<Object> get props => [];
 }
 
 class LoadTask extends TaskEvent {}
@@ -15,7 +15,7 @@ class AddNewTask extends TaskEvent {
   const AddNewTask({required this.newTaskList});
 
   @override
-  List<Object> props() => [newTaskList];
+  List<Object> get props => [newTaskList];
 }
 
 class DoneTask extends TaskEvent {
@@ -24,7 +24,7 @@ class DoneTask extends TaskEvent {
   const DoneTask({required this.taskList});
 
   @override
-  List<Object> props() => [taskList];
+  List<Object> get props => [taskList];
 }
 
 class UndoneTask extends TaskEvent {
@@ -33,7 +33,7 @@ class UndoneTask extends TaskEvent {
   const UndoneTask({required this.taskList});
 
   @override
-  List<Object> props() => [taskList];
+  List<Object> get props => [taskList];
 }
 
 class DeleteTask extends TaskEvent {
@@ -43,7 +43,7 @@ class DeleteTask extends TaskEvent {
   const DeleteTask({required this.task, required this.isInDoneDb});
 
   @override
-  List<Object> props() => [task, isInDoneDb];
+  List<Object> get props => [task, isInDoneDb];
 }
 
 class DeleteTaskList extends TaskEvent {
@@ -53,7 +53,7 @@ class DeleteTaskList extends TaskEvent {
   const DeleteTaskList({required this.taskList, required this.isInDoneDb});
 
   @override
-  List<Object> props() => [taskList, isInDoneDb];
+  List<Object> get props => [taskList, isInDoneDb];
 }
 
 class SelectTask extends TaskEvent {
@@ -62,5 +62,5 @@ class SelectTask extends TaskEvent {
   const SelectTask({required this.selectedTask});
 
   @override
-  List<Object> props() => [selectedTask];
+  List<Object> get props => [selectedTask];
 }

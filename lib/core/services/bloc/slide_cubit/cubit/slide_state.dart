@@ -4,7 +4,7 @@ abstract class SlideState extends Equatable {
   const SlideState();
 
   @override
-  List<Object> props() => [];
+  List<Object> get props => [];
 }
 
 class SlideInitial extends SlideState {}
@@ -15,5 +15,5 @@ class SliderSelected extends SlideState {
   const SliderSelected({required this.task});
 
   @override
-  List<Object> props() => [task];
+  List<Object> get props => [task];
 }

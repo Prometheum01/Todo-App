@@ -19,8 +19,12 @@ class TaskDate extends Equatable {
 
   String get formatDate => DateFormat.MMMd().format(toDateTime);
 
+  String get textMonth => DateFormat.MMM().format(toDateTime);
+
+  String get textDay => DateFormat.E().format(toDateTime);
+
   DateTime get toDateTime => DateTime(year, month, day);
 
   @override
-  List<Object?> props() => [year, month, day];
+  List<Object?> get props => [year, month, day];
 }

@@ -4,7 +4,7 @@ abstract class TaskState extends Equatable {
   const TaskState();
 
   @override
-  List<Object> props() => [];
+  List<Object> get props => [];
 }
 
 class TaskInitial extends TaskState {}
@@ -18,7 +18,7 @@ class TaskLoaded extends TaskState {
   const TaskLoaded({required this.waitingTaskList, required this.doneTaskList});
 
   @override
-  List<Object> props() => [waitingTaskList, doneTaskList];
+  List<Object> get props => [waitingTaskList, doneTaskList];
 }
 
 class TaskSelection extends TaskState {
@@ -32,5 +32,5 @@ class TaskSelection extends TaskState {
       required this.doneTaskList});
 
   @override
-  List<Object> props() => [waitingTaskList, doneTaskList, selectedTaskList];
+  List<Object> get props => [waitingTaskList, doneTaskList, selectedTaskList];
 }

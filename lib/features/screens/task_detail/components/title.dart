@@ -9,7 +9,7 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: context.textTheme.headline1,
+      style: context.textTheme.headlineLarge,
       textAlign: TextAlign.center,
       maxLines: 2,
     );

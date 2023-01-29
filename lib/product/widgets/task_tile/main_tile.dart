@@ -56,7 +56,7 @@ class MainTile extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       maxLines: 1,
-                      style: context.textTheme.headline3,
+                      style: context.textTheme.headlineMedium,
                     ),
                   ),
                   Expanded(
@@ -103,13 +103,13 @@ class _DateTime extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.right,
       text: TextSpan(
-        style:
-            context.textTheme.headline4?.copyWith(fontWeight: FontWeight.w900),
+        style: context.textTheme.headlineSmall
+            ?.copyWith(fontWeight: FontWeight.w900),
         text: date,
         children: [
           TextSpan(
             text: '\n$time',
-            style: context.textTheme.headline6,
+            style: context.textTheme.bodySmall,
           )
         ],
       ),

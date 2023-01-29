@@ -35,7 +35,7 @@ class _TaskTimeField extends StatelessWidget {
         children: [
           Text(
             StringConst.time.toCapitalized(),
-            style: context.textTheme.headline5,
+            style: context.textTheme.bodyMedium,
           ),
           BlocBuilder<NewTaskCubit, NewTaskState>(
             builder: (context, state) {
@@ -51,7 +51,7 @@ class _TaskTimeField extends StatelessWidget {
                         state is NewTaskFilling
                             ? state.newTask.time.formatTime
                             : StringConst.timeHint.toCapitalized(),
-                        style: context.textTheme.headline4,
+                        style: context.textTheme.headlineSmall,
                       ),
                     ),
                   ),

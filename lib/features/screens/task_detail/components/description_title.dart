@@ -7,7 +7,8 @@ class _DescriptionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       StringConst.description.toCapitalized(),
-      style: context.textTheme.headline4?.copyWith(fontWeight: FontWeight.w900),
+      style: context.textTheme.headlineSmall
+          ?.copyWith(fontWeight: FontWeight.w900),
     );
   }
 }

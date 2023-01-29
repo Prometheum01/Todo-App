@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kartal/kartal.dart';
 
 import '../../core/const/padding.dart';
-import '../../core/const/radius.dart';
 
 class GradientIconButton extends StatelessWidget {
   const GradientIconButton({
@@ -23,7 +22,6 @@ class GradientIconButton extends StatelessWidget {
       onTap: () {
         onPressed();
       },
-      borderRadius: const RadiusConst.circleAll(),
       child: Ink(
         decoration: BoxDecoration(
           shape: BoxShape.circle,

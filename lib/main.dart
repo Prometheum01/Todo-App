@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/core/services/bloc/calendar_cubit/cubit/calendar_cubit.dart';
 import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
 import 'package:todo_app/core/services/bloc/slide_cubit/cubit/slide_cubit.dart';
 import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
@@ -29,37 +30,42 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SlideCubit(),
         ),
+        BlocProvider(
+          create: (context) => CalendarCubit(),
+        ),
       ],
       child: MaterialApp(
         title: 'Todo App',
         theme: ThemeData(
+          useMaterial3: true,
           appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            centerTitle: true,
+          ),
           textTheme: TextTheme(
-              headline1: GoogleFonts.lato().copyWith(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w900,
-                  color: Colors.black),
-              headline2: GoogleFonts.baloo2().copyWith(
+              displayMedium: GoogleFonts.baloo2().copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.normal,
                   color: Colors.black),
-              headline3: GoogleFonts.lato().copyWith(
+              headlineLarge: GoogleFonts.lato().copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.black),
+              headlineMedium: GoogleFonts.lato().copyWith(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: Colors.black),
-              headline4: GoogleFonts.lato().copyWith(
+              headlineSmall: GoogleFonts.lato().copyWith(
                   fontSize: 12,
                   fontWeight: FontWeight.normal,
                   color: Colors.black),
-              headline5: GoogleFonts.lato().copyWith(
+              bodyMedium: GoogleFonts.lato().copyWith(
                 fontSize: 12,
                 fontWeight: FontWeight.w900,
                 color: Colors.black.withOpacity(0.2),
               ),
-              headline6: GoogleFonts.lato().copyWith(
+              bodySmall: GoogleFonts.lato().copyWith(
                 fontSize: 10,
                 fontWeight: FontWeight.w400,
                 color: Colors.black.withOpacity(0.6),

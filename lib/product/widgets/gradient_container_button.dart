@@ -41,7 +41,7 @@ class GradientContainerButton extends StatelessWidget {
           child: Center(
             child: Text(
               text.toCapitalized(),
-              style: context.textTheme.headline2?.copyWith(
+              style: context.textTheme.displayMedium?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
                 fontSize: 24,

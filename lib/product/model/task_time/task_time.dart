@@ -31,11 +31,16 @@ class TaskTime extends Equatable {
     return '$textHour:$textMinute $textIsAm';
   }
 
+  String get format24Hour {
+    int hour24 = toTimeOfDay.hour;
+    return hour24 < 10 ? '0$hour24' : hour24.toString();
+  }
+
   TimeOfDay get toTimeOfDay => TimeOfDay(
         hour: isAm ? hour : hour + 12,
         minute: minute,
       );
 
   @override
-  List<Object?> props() => [hour, minute, isAm];
+  List<Object?> get props => [hour, minute, isAm];
 }

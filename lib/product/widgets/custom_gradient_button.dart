@@ -50,7 +50,7 @@ class GradientButton extends StatelessWidget {
                 const PaddingConst.mediumSymmetricVertical(),
             child: Text(
               _text.toCapitalized(),
-              style: context.textTheme.headline3?.copyWith(
+              style: context.textTheme.headlineMedium?.copyWith(
                 color: Colors.white,
               ),
             ),

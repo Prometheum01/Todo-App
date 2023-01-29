@@ -34,7 +34,7 @@ class _DoneTaskViewState extends DoneTaskViewModel {
           automaticallyImplyLeading: false,
           title: Text(
             StringConst.doneTasks.toUpperCase(),
-            style: context.textTheme.headline2,
+            style: context.textTheme.displayMedium,
           ),
           leading: IconButton(
             onPressed: () {
