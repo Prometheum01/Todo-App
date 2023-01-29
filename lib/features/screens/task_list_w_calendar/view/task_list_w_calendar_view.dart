@@ -34,9 +34,16 @@ class _TaskListCalendarViewState extends TaskListCalendarViewModel {
           } else if (state is CalendarCreated) {
             return Scaffold(
               appBar: AppBar(
+                scrolledUnderElevation: 0,
                 title: Text(
-                  '${state.selectedMonthIndex % 12} ',
+                  monthAndYear(
+                      state.selectedYear, (state.selectedMonthIndex % 12) + 1),
                   style: context.textTheme.displayMedium,
+                ),
+                leading: BackIconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
               ),
               backgroundColor: Colors.transparent,
@@ -51,54 +58,30 @@ class _TaskListCalendarViewState extends TaskListCalendarViewModel {
                         scrollDirection: Axis.horizontal,
                         itemCount: state.taskDateList.length,
                         separatorBuilder: (context, index) => const Padding(
-                            padding: PaddingConst.xSmallSymmetricHorizontal()),
-                        itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            context.read<CalendarCubit>().changeDay(
-                                taskDate: state.taskDateList[index],
-                                context: context,
-                                selectedIndex: index);
+                          padding: PaddingConst.xSmallSymmetricHorizontal(),
+                        ),
+                        itemBuilder: (context, index) => CalendarDecoration(
+                          selectedIndex: state.selectedIndex,
+                          days: state.taskDateList,
+                          index: index,
+                          onPressed: () {
+                            tapCalendarCard(state.taskDateList[index], index);
                           },
-                          child: CalendarDecoration(
-                            selectedIndex: state.selectedIndex,
-                            days: state.taskDateList,
-                            index: index,
-                          ),
                         ),
                       ),
                     ),
                     Flexible(
                       flex: 6,
-                      child: ListView.separated(
-                        itemCount: state.selectedTaskList.length,
-                        separatorBuilder: (context, index) => const Padding(
-                            padding: PaddingConst.smallSymmetricVertical()),
-                        itemBuilder: (context, index) => Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                                flex: 2,
-                                child: Center(
-                                  child: TaskTimeDOC(
-                                      task: state.selectedTaskList[index]),
-                                )),
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: DoneOrTickIcon(
-                                  isDone: state.selectedTaskList[index].isDone,
-                                  color: Color(state.selectedTaskList[index]
-                                      .taskType.colorList.first),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 12,
-                              child: TaskCard(
-                                task: state.selectedTaskList[index],
-                              ),
-                            ),
-                          ],
+                      child: FadeTransition(
+                        opacity: opacityAnimation,
+                        child: ListView.separated(
+                          itemCount: state.selectedTaskList.length,
+                          separatorBuilder: (context, index) => const Padding(
+                            padding: PaddingConst.smallSymmetricVertical(),
+                          ),
+                          itemBuilder: (context, index) => TaskTileWithRow(
+                            task: state.selectedTaskList[index],
+                          ),
                         ),
                       ),
                     ),
@@ -116,8 +99,65 @@ class _TaskListCalendarViewState extends TaskListCalendarViewModel {
   }
 }
 
-class TaskTimeDOC extends StatelessWidget {
-  const TaskTimeDOC({
+class TaskTileWithRow extends StatelessWidget {
+  const TaskTileWithRow({
+    super.key,
+    required this.task,
+  });
+
+  final Task task;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+            flex: 2,
+            child: Center(
+              child: TaskTimeTextDOC(task: task),
+            )),
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: DoneOrTickIcon(
+              isDone: task.isDone,
+              color: Color(task.taskType.colorList.first),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 12,
+          child: TaskCard(
+            task: task,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class BackIconButton extends StatelessWidget {
+  const BackIconButton({
+    super.key,
+    this.onPressed,
+  });
+
+  final void Function()? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: onPressed,
+      icon: SvgPicture.asset(
+        ImageConst.backwardIconPath,
+      ),
+    );
+  }
+}
+
+class TaskTimeTextDOC extends StatelessWidget {
+  const TaskTimeTextDOC({
     super.key,
     required this.task,
   });
@@ -192,7 +232,7 @@ class TaskCard extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: const PaddingConst.mediumAll(),
+                  padding: const PaddingConst.smallAll(),
                   child: SvgPicture.asset(
                     task.taskType.iconPath,
                   ),
@@ -223,49 +263,57 @@ class CalendarDecoration extends StatelessWidget {
     required this.selectedIndex,
     required this.days,
     required this.index,
+    this.onPressed,
   }) : super(key: key);
 
   final int selectedIndex;
   final int index;
   final List<TaskDate> days;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      width: context.dynamicWidth(0.2),
-      decoration: BoxDecoration(
-        borderRadius: const RadiusConst.smallAll(),
-        gradient: LinearGradient(
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-          colors: selectedIndex != index
-              ? const [
-                  Colors.transparent,
-                  Colors.transparent,
-                ]
-              : const [
-                  Color(ColorConst.palatinateBlue),
-                  Color(ColorConst.aqua),
-                ],
+    return InkWell(
+      borderRadius: const RadiusConst.smallAll(),
+      onTap: onPressed,
+      child: Ink(
+        width: context.dynamicWidth(0.2),
+        decoration: BoxDecoration(
+          borderRadius: const RadiusConst.smallAll(),
+          gradient: LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: selectedIndex != index
+                ? const [
+                    Colors.transparent,
+                    Colors.transparent,
+                  ]
+                : const [
+                    Color(ColorConst.palatinateBlue),
+                    Color(ColorConst.aqua),
+                  ],
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const PaddingConst.xLargeSymmetricHorizontal(),
-        child: Center(
-          child: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              text: days[index].day.toString(),
-              style: context.textTheme.displayMedium?.copyWith(
-                  color: selectedIndex != index ? Colors.black : Colors.white),
-              children: [
-                TextSpan(
-                  text: '\n${days[index].textDay}',
-                  style: context.textTheme.displayMedium?.copyWith(
-                      color:
-                          selectedIndex != index ? Colors.black : Colors.white),
-                ),
-              ],
+        child: Padding(
+          padding: const PaddingConst.xLargeSymmetricHorizontal(),
+          child: Center(
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: days[index].day.toString(),
+                style: context.textTheme.displayMedium?.copyWith(
+                    color:
+                        selectedIndex != index ? Colors.black : Colors.white),
+                children: [
+                  TextSpan(
+                    text: '\n${days[index].textDay}',
+                    style: context.textTheme.displayMedium?.copyWith(
+                        color: selectedIndex != index
+                            ? Colors.black
+                            : Colors.white),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

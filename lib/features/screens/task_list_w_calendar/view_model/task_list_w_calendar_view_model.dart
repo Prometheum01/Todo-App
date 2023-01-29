@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/extension/date_time.dart';
 import 'package:todo_app/core/services/bloc/calendar_cubit/cubit/calendar_cubit.dart';
@@ -7,15 +10,67 @@ import 'package:todo_app/product/model/task_date/task_date.dart';
 
 import '../view/task_list_w_calendar_view.dart';
 
-abstract class TaskListCalendarViewModel extends State<TaskListCalendarView> {
+abstract class TaskListCalendarViewModel extends State<TaskListCalendarView>
+    with TickerProviderStateMixin {
   late ScrollController controller;
+
+  late AnimationController animationController;
+  late Animation<double> opacityAnimation;
 
   @override
   void initState() {
     super.initState();
+
     controller = ScrollController();
+    createAnimation();
     initCalendar();
-    Future.microtask(() => animateListViewToCurrentDate());
+
+    Future.microtask(() {
+      animateListViewToCurrentDate(
+          (context.read<CalendarCubit>().state as CalendarCreated)
+              .selectedIndex);
+      listenDays();
+    });
+  }
+
+  void tapCalendarCard(TaskDate taskDate, index) {
+    animateListViewToCurrentDate(index);
+    Future.delayed(
+      Duration(milliseconds: 250),
+      () {
+        context.read<CalendarCubit>().changeDay(
+              taskDate: taskDate,
+              context: context,
+              selectedIndex: index,
+            );
+      },
+    );
+  }
+
+  createAnimation() {
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 250),
+    );
+
+    opacityAnimation =
+        Tween<double>(begin: 1.0, end: 0.0).animate(animationController)
+          ..addStatusListener((status) {
+            switch (status) {
+              case AnimationStatus.dismissed:
+                // TODO: Handle this case.
+                break;
+              case AnimationStatus.forward:
+                // TODO: Handle this case.
+                break;
+              case AnimationStatus.reverse:
+                // TODO: Handle this case.
+                break;
+              case AnimationStatus.completed:
+                animationController.reverse();
+                break;
+            }
+          });
   }
 
   initCalendar() {
@@ -89,25 +144,28 @@ abstract class TaskListCalendarViewModel extends State<TaskListCalendarView> {
     });
   }
 
-  animateListViewToCurrentDate() {
+  animateListViewToCurrentDate(int selectedIndex) {
     // ignore: no_leading_underscores_for_local_identifiers
-    int _selectedIndex =
-        (context.read<CalendarCubit>().state as CalendarCreated).selectedIndex;
+    double allBoxSize = (context.dynamicWidth(0.2) * (selectedIndex));
 
-    double allBoxSize = (context.dynamicWidth(0.2) * (_selectedIndex));
+    double allPaddingSize = 8.0 * (selectedIndex);
 
     double sizeForMid = context.dynamicWidth(0.5 - 0.1) - 8;
-
-    double allPaddingSize = 8 * (_selectedIndex - 1);
 
     controller.animateTo(
       allBoxSize + allPaddingSize - sizeForMid,
       duration: context.durationLow,
       curve: Curves.linear,
     );
-
-    listenDays();
+    animationController.forward();
   }
+
+  String monthAndYear(year, month) => DateFormat.yMMMM().format(
+        DateTime(
+          year,
+          month,
+        ),
+      );
 
   @override
   void dispose() {

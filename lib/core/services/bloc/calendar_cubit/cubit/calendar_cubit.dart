@@ -91,12 +91,16 @@ class CalendarCubit extends Cubit<CalendarState> {
 
       taskList.sort(
         (a, b) {
-          if (a.time.hour == b.time.hour) {
-            return a.time.toTimeOfDay.minute
-                .compareTo(b.time.toTimeOfDay.minute);
+          TimeOfDay timeOfDayA = a.time.toTimeOfDay;
+          TimeOfDay timeOfDayB = b.time.toTimeOfDay;
+          if (timeOfDayA.hour == timeOfDayB.hour) {
+            if (timeOfDayA.minute == timeOfDayB.minute) {
+              return a.title.compareTo(b.title);
+            }
+            return timeOfDayA.minute.compareTo(timeOfDayB.minute);
           }
 
-          return a.time.toTimeOfDay.hour.compareTo(b.time.toTimeOfDay.hour);
+          return timeOfDayA.hour.compareTo(timeOfDayB.hour);
         },
       );
 
