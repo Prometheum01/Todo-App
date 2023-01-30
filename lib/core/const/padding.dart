@@ -39,6 +39,8 @@ class PaddingConst extends EdgeInsets {
   //Only
   const PaddingConst.xLargeTop() : super.only(top: _xLarge);
   const PaddingConst.smallLeft() : super.only(left: _small);
+  const PaddingConst.smallTop() : super.only(top: _small);
+  const PaddingConst.smallBottom() : super.only(bottom: _small);
   const PaddingConst.smallTopMediumBottom()
       : super.only(top: _small, bottom: _medium);
 }

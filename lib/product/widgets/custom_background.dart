@@ -19,6 +19,8 @@ class CustomBackground extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
               colors: [
                 Colors.white,
                 Color(ColorConst.background),

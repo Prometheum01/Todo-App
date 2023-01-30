@@ -7,6 +7,7 @@ import 'package:todo_app/core/const/image.dart';
 import 'package:todo_app/core/const/padding.dart';
 
 import 'package:todo_app/core/const/string.dart';
+import 'package:todo_app/core/extension/list_extension.dart';
 import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
 import 'package:todo_app/features/screens/new_task/view/new_task_view.dart';
 import 'package:todo_app/product/model/task/task.dart';
@@ -52,17 +53,19 @@ class _TaskListViewState extends TaskListViewModel {
                   list = state.waitingTaskList;
                 }
 
+                list = list.sortTaskList;
+
                 return Stack(
                   children: [
-                    ListView.separated(
+                    ListView.builder(
                       itemCount: list.length,
-                      separatorBuilder: (context, index) => const Padding(
-                        padding: PaddingConst.smallSymmetricVertical(),
-                      ),
-                      itemBuilder: (context, index) => TaskTile(
-                        task: list[index],
-                        isIncludeDoneButton: true,
-                        isSelectionMode: state is TaskSelection,
+                      itemBuilder: (context, index) => Padding(
+                        padding: const PaddingConst.smallSymmetricVertical(),
+                        child: TaskTile(
+                          task: list[index],
+                          isIncludeDoneButton: true,
+                          isSelectionMode: state is TaskSelection,
+                        ),
                       ),
                     ),
                     Padding(

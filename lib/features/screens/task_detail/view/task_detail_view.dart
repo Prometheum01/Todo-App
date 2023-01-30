@@ -7,6 +7,7 @@ import 'package:todo_app/core/const/padding.dart';
 import 'package:todo_app/core/const/string.dart';
 import 'package:todo_app/features/screens/task_detail/view_model/task_detail_view_model.dart';
 import 'package:todo_app/product/model/task/task.dart';
+import 'package:todo_app/product/widgets/n_circle_task_type_icon.dart';
 import 'package:todo_app/product/widgets/widgets.dart';
 
 part 'package:todo_app/features/screens/task_detail/components/title.dart';
@@ -29,18 +30,21 @@ class _TaskDetailViewState extends TaskDetailViewModel {
     return Container(
       decoration: BoxDecorationConst.whiteRounded(),
       child: Padding(
-        padding: const PaddingConst.largeAll(),
+        padding: const PaddingConst.mediumAll(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            GradientIconCircle(type: task.taskType),
+            CircleTaskTypeIcon(taskType: task.taskType),
             Padding(
-              padding: const PaddingConst.smallTopMediumBottom(),
+              padding: const PaddingConst.mediumSymmetricVertical(),
               child: _Title(text: task.title),
             ),
-            _DateTime(date: task.date.formatDate, time: task.time.formatTime),
+            _DateTime(
+              date: task.date.formatDate,
+              time: task.time.formatTime,
+            ),
             const Padding(
-              padding: PaddingConst.largeSymmetricVertical(),
+              padding: PaddingConst.mediumSymmetricVertical(),
               child: _DescriptionTitle(),
             ),
             Flexible(

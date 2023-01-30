@@ -34,7 +34,7 @@ abstract class TaskListCalendarViewModel extends State<TaskListCalendarView>
   void tapCalendarCard(TaskDate taskDate, index) {
     animateListViewToCurrentDate(index);
     Future.delayed(
-      Duration(milliseconds: 250),
+      Duration(milliseconds: context.durationLow.inMilliseconds ~/ 2),
       () {
         context.read<CalendarCubit>().changeDay(
               taskDate: taskDate,
@@ -48,7 +48,7 @@ abstract class TaskListCalendarViewModel extends State<TaskListCalendarView>
   createAnimation() {
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 250),
+      duration: Duration(milliseconds: context.durationLow.inMilliseconds ~/ 2),
     );
 
     opacityAnimation =
@@ -56,13 +56,10 @@ abstract class TaskListCalendarViewModel extends State<TaskListCalendarView>
           ..addStatusListener((status) {
             switch (status) {
               case AnimationStatus.dismissed:
-                // TODO: Handle this case.
                 break;
               case AnimationStatus.forward:
-                // TODO: Handle this case.
                 break;
               case AnimationStatus.reverse:
-                // TODO: Handle this case.
                 break;
               case AnimationStatus.completed:
                 animationController.reverse();

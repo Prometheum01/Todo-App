@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
+import 'package:todo_app/product/widgets/n_circle_task_type_icon.dart';
 
 import '../../core/const/padding.dart';
 import '../model/task_type/task_type.dart';
@@ -39,6 +40,8 @@ class TaskTypeButton extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight,
                         colors: [
                           Color(type.colorList.first),
                           Color(type.colorList.last),
@@ -48,24 +51,10 @@ class TaskTypeButton extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: context.dynamicHeight(0.075),
                 width: context.dynamicWidth(0.075),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(type.colorList.first),
-                      Color(type.colorList.last),
-                    ],
-                  ),
-                ),
-                child: Padding(
-                  padding: const PaddingConst.smallAll(),
-                  child: SvgPicture.asset(
-                    type.iconPath,
-                  ),
-                ),
+                child: CircleTaskTypeIcon(taskType: type),
               ),
             ],
           ),

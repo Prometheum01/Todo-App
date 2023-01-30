@@ -32,6 +32,8 @@ class GradientIconCircle extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
           colors: [
             Color(type.colorList.first),
             Color(type.colorList.last),

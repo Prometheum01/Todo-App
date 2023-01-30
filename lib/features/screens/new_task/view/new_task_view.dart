@@ -64,7 +64,7 @@ class _NewTaskViewState extends NewTaskViewModel {
                     onPressed: () {
                       addNewTask();
                     },
-                    text: StringConst.addTask.toCapitalized(),
+                    text: StringConst.addTask,
                   ),
                 ),
               )

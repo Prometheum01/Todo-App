@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/const/string.dart';
+import 'package:todo_app/core/extension/list_extension.dart';
 import 'package:todo_app/features/screens/done_task/view_model/done_task_view_model.dart';
 import 'package:todo_app/product/model/task/task.dart';
 import 'package:todo_app/product/widgets/error_animation.dart';
@@ -58,29 +59,33 @@ class _DoneTaskViewState extends DoneTaskViewModel {
 
               if (state is TaskLoaded) {
                 List<Task> list = state.doneTaskList;
-                return ListView.separated(
+                list = list.sortTaskList;
+                return ListView.builder(
                   itemCount: list.length,
-                  separatorBuilder: (context, index) => const Padding(
-                      padding: PaddingConst.smallSymmetricVertical()),
-                  itemBuilder: (context, index) => TaskTile(
-                    task: list[index],
-                    isIncludeDoneButton: false,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const PaddingConst.smallSymmetricVertical(),
+                    child: TaskTile(
+                      task: list[index],
+                      isIncludeDoneButton: false,
+                    ),
                   ),
                 );
               }
 
               if (state is TaskSelection) {
                 List<Task> list = state.doneTaskList;
+                list = list.sortTaskList;
                 return Stack(
                   children: [
-                    ListView.separated(
+                    ListView.builder(
                       itemCount: list.length,
-                      separatorBuilder: (context, index) => const Padding(
-                          padding: PaddingConst.smallSymmetricVertical()),
-                      itemBuilder: (context, index) => MainTile(
-                        task: list[index],
-                        isSelectionMode: true,
-                        isDonePage: true,
+                      itemBuilder: (context, index) => Padding(
+                        padding: const PaddingConst.smallSymmetricVertical(),
+                        child: MainTile(
+                          task: list[index],
+                          isSelectionMode: true,
+                          isDonePage: true,
+                        ),
                       ),
                     ),
                     Align(

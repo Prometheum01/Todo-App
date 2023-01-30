@@ -59,7 +59,9 @@ class _TaskListCalendarViewState extends TaskListCalendarViewModel {
                         ),
                         itemBuilder: (context, index) => CalendarDayCard(
                           onPressed: () {
-                            tapCalendarCard(state.taskDateList[index], index);
+                            if (state.selectedIndex != index) {
+                              tapCalendarCard(state.taskDateList[index], index);
+                            }
                           },
                           isSelected: state.selectedIndex == index,
                           taskDate: state.taskDateList[index],
@@ -70,13 +72,14 @@ class _TaskListCalendarViewState extends TaskListCalendarViewModel {
                       flex: 6,
                       child: FadeTransition(
                         opacity: opacityAnimation,
-                        child: ListView.separated(
+                        child: ListView.builder(
                           itemCount: state.selectedTaskList.length,
-                          separatorBuilder: (context, index) => const Padding(
-                            padding: PaddingConst.smallSymmetricVertical(),
-                          ),
-                          itemBuilder: (context, index) => TaskTileWithRow(
-                            task: state.selectedTaskList[index],
+                          itemBuilder: (context, index) => Padding(
+                            padding:
+                                const PaddingConst.smallSymmetricVertical(),
+                            child: TaskTileWithRow(
+                              task: state.selectedTaskList[index],
+                            ),
                           ),
                         ),
                       ),

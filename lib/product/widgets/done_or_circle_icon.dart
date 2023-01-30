@@ -30,6 +30,8 @@ class DoneOrCircleIcon extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
                   colors: [colorList.first, colorList.last],
                 ),
               ),

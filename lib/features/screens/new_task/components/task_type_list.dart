@@ -18,14 +18,8 @@ class _TaskTypeList extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TaskTypeButton(type: TaskType.taskList[0]),
-            TaskTypeButton(type: TaskType.taskList[1]),
-            TaskTypeButton(type: TaskType.taskList[2]),
-            TaskTypeButton(type: TaskType.taskList[3]),
-            TaskTypeButton(type: TaskType.taskList[4]),
-            TaskTypeButton(type: TaskType.taskList[5]),
-          ],
+          children:
+              TaskType.taskList.map((e) => TaskTypeButton(type: e)).toList(),
         ),
       ],
     );
