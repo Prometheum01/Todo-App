@@ -16,14 +16,10 @@ class CircleButtonRow extends StatelessWidget {
     return SizedBox(
       width: context.dynamicWidth(0.15) * iconButtonList.length,
       child: Material(
-        color: Colors.transparent,
-        child: Builder(
-          builder: (context) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: iconButtonList,
-            );
-          },
+        type: MaterialType.transparency,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: iconButtonList,
         ),
       ),
     );

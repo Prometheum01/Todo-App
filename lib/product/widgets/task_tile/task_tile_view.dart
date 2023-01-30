@@ -15,12 +15,14 @@ class TaskTile extends StatefulWidget {
   const TaskTile({
     Key? key,
     required this.task,
-    this.isLeftDone = true,
+    this.isIncludeDoneButton = true,
+    this.isSelectionMode = false,
   }) : super(key: key);
 
   final Task task;
 
-  final bool isLeftDone;
+  final bool isIncludeDoneButton;
+  final bool isSelectionMode;
 
   @override
   State<TaskTile> createState() => _TaskTileState();
@@ -35,83 +37,87 @@ class _TaskTileState extends TaskTileViewModel {
         children: [
           MainTile(
             task: widget.task,
-            isSelectionMode: false,
-            isDonePage: !widget.isLeftDone,
+            isSelectionMode: widget.isSelectionMode,
+            isDonePage: !widget.isIncludeDoneButton,
           ),
-          BlocBuilder<SlideCubit, SlideState>(
-            builder: (context, state) {
-              if (state is SliderSelected) {
-                if (state.task != widget.task) {
-                  try {
-                    controller.animateToPage(1,
-                        duration: context.durationLow, curve: Curves.linear);
-                  } catch (e) {
-                    //If controller does not initialize, it throw exception because of animateToPage
-                  }
-                }
-              }
-
-              return PageView(
-                controller: controller,
-                onPageChanged: state is SlideInitial
-                    ? (value) {
-                        context
-                            .read<SlideCubit>()
-                            .changeSliderTask(widget.task);
-                      }
-                    : (value) {
-                        if (value == 1) {
-                          context.read<SlideCubit>().removeSliderTask();
-                        } else {
-                          context
-                              .read<SlideCubit>()
-                              .changeSliderTask(widget.task);
+          widget.isSelectionMode
+              ? const SizedBox.shrink()
+              : BlocBuilder<SlideCubit, SlideState>(
+                  builder: (context, state) {
+                    if (state is SliderSelected) {
+                      if (state.task != widget.task) {
+                        try {
+                          controller.animateToPage(1,
+                              duration: context.durationLow,
+                              curve: Curves.linear);
+                        } catch (e) {
+                          //If controller does not initialize, it throw exception because of animateToPage
                         }
-                      },
-                children: [
-                  GradientContainerButton(
-                    onPressed: () {
-                      if (widget.isLeftDone) {
-                        selectDone();
-                      } else {
-                        selectUndone();
                       }
+                    }
 
-                      controller.jumpToPage(1);
-                    },
-                    text: widget.isLeftDone
-                        ? StringConst.done
-                        : StringConst.undone,
-                    colorList: widget.task.taskType.colorList,
-                  ),
-                  Material(
-                    color: Colors.transparent,
-                    borderRadius: const RadiusConst.smallAll(),
-                    child: InkWell(
-                      borderRadius: const RadiusConst.smallAll(),
-                      onLongPress: () {
-                        openSelectionMode();
-                      },
-                      onTap: () {
-                        openDetailSheet();
-                      },
-                      splashColor: Color(widget.task.taskType.colorList.first)
-                          .withOpacity(0.18),
-                      child: Ink(),
-                    ),
-                  ),
-                  GradientContainerButton(
-                    onPressed: () {
-                      selectRemove();
-                      controller.jumpToPage(1);
-                    },
-                    text: StringConst.remove.toUpperCase(),
-                    colorList: TaskType.removeType.colorList,
-                  ),
-                ],
-              );
-            },
-          ),
+                    return PageView(
+                      controller: controller,
+                      onPageChanged: state is SlideInitial
+                          ? (value) {
+                              context
+                                  .read<SlideCubit>()
+                                  .changeSliderTask(widget.task);
+                            }
+                          : (value) {
+                              if (value == 1) {
+                                context.read<SlideCubit>().removeSliderTask();
+                              } else {
+                                context
+                                    .read<SlideCubit>()
+                                    .changeSliderTask(widget.task);
+                              }
+                            },
+                      children: [
+                        GradientContainerButton(
+                          onPressed: () {
+                            if (widget.isIncludeDoneButton) {
+                              selectDone();
+                            } else {
+                              selectUndone();
+                            }
+
+                            controller.jumpToPage(1);
+                          },
+                          text: widget.isIncludeDoneButton
+                              ? StringConst.done
+                              : StringConst.undone,
+                          colorList: widget.task.taskType.colorList,
+                        ),
+                        Material(
+                          color: Colors.transparent,
+                          borderRadius: const RadiusConst.smallAll(),
+                          child: InkWell(
+                            borderRadius: const RadiusConst.smallAll(),
+                            onLongPress: () {
+                              openSelectionMode();
+                            },
+                            onTap: () {
+                              openDetailSheet();
+                            },
+                            splashColor:
+                                Color(widget.task.taskType.colorList.first)
+                                    .withOpacity(0.18),
+                            child: Ink(),
+                          ),
+                        ),
+                        GradientContainerButton(
+                          onPressed: () {
+                            selectRemove();
+                            controller.jumpToPage(1);
+                          },
+                          text: StringConst.remove,
+                          colorList: TaskType.removeType.colorList,
+                        ),
+                      ],
+                    );
+                  },
+                ),
         ],
       ),
     );

@@ -12,7 +12,7 @@ class GradientContainerButton extends StatelessWidget {
   }) : super(key: key);
 
   final String text;
-  final Function onPressed;
+  final void Function()? onPressed;
   final List<int> colorList;
 
   @override
@@ -22,19 +22,17 @@ class GradientContainerButton extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: const RadiusConst.smallAll(),
-        onTap: () {
-          onPressed();
-        },
+        onTap: onPressed,
         splashColor: Color(colorList.first),
         child: Ink(
           decoration: BoxDecoration(
             borderRadius: const RadiusConst.smallAll(),
             gradient: LinearGradient(
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
               colors: [
                 Color(colorList.first),
-                Color(
-                  colorList.last,
-                ),
+                Color(colorList.last),
               ],
             ),
           ),

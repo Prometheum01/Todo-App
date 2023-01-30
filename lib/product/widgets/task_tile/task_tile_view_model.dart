@@ -23,7 +23,7 @@ abstract class TaskTileViewModel extends State<TaskTile> {
   selectRemove() {
     context.read<TaskBloc>().add(DeleteTask(
           task: widget.task,
-          isInDoneDb: !widget.isLeftDone,
+          isInDoneDb: !widget.isIncludeDoneButton,
         ));
   }
 

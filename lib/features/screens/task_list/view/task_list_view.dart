@@ -57,22 +57,18 @@ class _TaskListViewState extends TaskListViewModel {
                     ListView.separated(
                       itemCount: list.length,
                       separatorBuilder: (context, index) => const Padding(
-                          padding: PaddingConst.smallSymmetricVertical()),
-                      itemBuilder: (context, index) => (state is TaskLoaded)
-                          ? TaskTile(
-                              task: list[index],
-                              isLeftDone: true,
-                            )
-                          : MainTile(
-                              task: list[index],
-                              isSelectionMode: true,
-                              isDonePage: false,
-                            ),
+                        padding: PaddingConst.smallSymmetricVertical(),
+                      ),
+                      itemBuilder: (context, index) => TaskTile(
+                        task: list[index],
+                        isIncludeDoneButton: true,
+                        isSelectionMode: state is TaskSelection,
+                      ),
                     ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const PaddingConst.mediumSymmetricVertical(),
+                    Padding(
+                      padding: const PaddingConst.smallAll(),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
                         child: CircleButtonRow(
                           iconButtonList: (state is TaskLoaded)
                               ? [
@@ -169,11 +165,7 @@ class _TaskListViewState extends TaskListViewModel {
       ),
       actions: [
         IconButton(
-          onPressed: () {
-            //Open done task page
-
-            openDonePage();
-          },
+          onPressed: openDonePage,
           icon: SvgPicture.asset(
             ImageConst.doneTaskListIconPath,
           ),

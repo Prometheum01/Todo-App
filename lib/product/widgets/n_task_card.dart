@@ -30,16 +30,32 @@ class TaskCard extends StatelessWidget {
               flex: 9,
               child: Padding(
                 padding: const PaddingConst.smallSymmetricHorizontal(),
-                child: Text(
-                  task.title,
-                  style: context.textTheme.headlineMedium,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                child: TaskCardTitle(text: task.title),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class TaskCardTitle extends StatelessWidget {
+  const TaskCardTitle({
+    super.key,
+    required this.text,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: context.textTheme.headlineMedium,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.left,
+      maxLines: 1,
     );
   }
 }

@@ -64,7 +64,7 @@ class _DoneTaskViewState extends DoneTaskViewModel {
                       padding: PaddingConst.smallSymmetricVertical()),
                   itemBuilder: (context, index) => TaskTile(
                     task: list[index],
-                    isLeftDone: false,
+                    isIncludeDoneButton: false,
                   ),
                 );
               }

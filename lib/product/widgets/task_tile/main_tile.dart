@@ -5,12 +5,14 @@ import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/const/decoration.dart';
 
 import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
+import 'package:todo_app/product/widgets/n_circle_task_type_icon.dart';
+import 'package:todo_app/product/widgets/n_done_or_circle_icon.dart';
+import 'package:todo_app/product/widgets/n_task_card.dart';
 
 import '../../../core/const/padding.dart';
 import '../../../core/const/radius.dart';
 import '../../model/task/task.dart';
-
-import '../widgets.dart';
+import '../selection_border_button.dart';
 
 class MainTile extends StatelessWidget {
   const MainTile({
@@ -30,34 +32,29 @@ class MainTile extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            context.read<TaskBloc>().add(SelectTask(selectedTask: task));
+            context.read<TaskBloc>().add(
+                  SelectTask(
+                    selectedTask: task,
+                  ),
+                );
           },
           borderRadius: const RadiusConst.smallAll(),
           splashColor: Color(task.taskType.colorList.first).withOpacity(0.18),
           child: Ink(
-            height: context.dynamicHeight(0.1),
             decoration: BoxDecorationConst.whiteRoundedWShadow(),
             child: Padding(
-              padding: const PaddingConst.smallSymmetricHorizontal(),
+              padding: const PaddingConst.mediumAll(),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     flex: 1,
-                    child: TaskTypeCircle(
-                      type: task.taskType,
-                    ),
+                    child: CircleTaskTypeIcon(taskType: task.taskType),
                   ),
                   Expanded(
                     flex: 7,
-                    child: Text(
-                      task.title,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      maxLines: 1,
-                      style: context.textTheme.headlineMedium,
-                    ),
+                    child: TaskCardTitle(text: task.title),
                   ),
                   Expanded(
                     flex: 1,
@@ -77,11 +74,10 @@ class MainTile extends StatelessWidget {
           padding: const PaddingConst.xSmallSymmetricHorizontal() +
               const PaddingConst.smallSymmetricVertical(),
           child: DoneOrCircleIcon(
-            isDonePage: isDonePage,
-            colorList: [
-              Color(task.taskType.colorList.first),
-              Color(task.taskType.colorList.last),
-            ],
+            isDone: isDonePage,
+            color: Color(
+              task.taskType.colorList.first,
+            ),
           ),
         ),
       ],

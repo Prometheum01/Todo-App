@@ -22,7 +22,6 @@ class SelectionBorderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: const RadiusConst.smallAll(),
       color: Colors.transparent,
       child: InkWell(
         borderRadius: const RadiusConst.smallAll(),
@@ -30,8 +29,6 @@ class SelectionBorderButton extends StatelessWidget {
           context.read<TaskBloc>().add(SelectTask(selectedTask: task));
         },
         child: Ink(
-          height: 32,
-          width: 32,
           decoration: BoxDecoration(
             borderRadius: const RadiusConst.smallAll(),
             color: Colors.white,
@@ -52,7 +49,7 @@ class SelectionBorderButton extends StatelessWidget {
                   duration: context.durationLow,
                   opacity: state.selectedTaskList.contains(task) ? 1 : 0,
                   child: Padding(
-                    padding: const PaddingConst.xSmallAll(),
+                    padding: const PaddingConst.mediumAll(),
                     child: SvgPicture.asset(ImageConst.doneIconPath),
                   ),
                 );

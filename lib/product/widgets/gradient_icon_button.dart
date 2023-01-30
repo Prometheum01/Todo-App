@@ -1,31 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kartal/kartal.dart';
+import 'package:todo_app/core/const/radius.dart';
 
 import '../../core/const/padding.dart';
 
 class GradientIconButton extends StatelessWidget {
   const GradientIconButton({
     Key? key,
-    required this.onPressed,
+    this.onPressed,
     required this.colorList,
     required this.iconPath,
   }) : super(key: key);
 
-  final Function onPressed;
+  final void Function()? onPressed;
   final List<Color> colorList;
   final String iconPath;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        onPressed();
-      },
+      onTap: onPressed,
+      splashColor: Colors.transparent,
+      borderRadius: const RadiusConst.smallAll(),
+      radius: 0,
       child: Ink(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
             colors: colorList,
           ),
           boxShadow: [

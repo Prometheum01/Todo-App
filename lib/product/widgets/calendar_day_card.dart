@@ -59,7 +59,6 @@ class CalendarDayCard extends StatelessWidget {
 
 class _DayUnderText extends StatelessWidget {
   const _DayUnderText({
-    super.key,
     required this.taskDate,
     required this.isSelected,
   });
