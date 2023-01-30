@@ -6,7 +6,6 @@ import 'package:todo_app/features/screens/done_task/view/done_task_view.dart';
 import 'package:todo_app/features/screens/task_list_w_calendar/view/task_list_w_calendar_view.dart';
 
 import '../../../../core/services/bloc/task_bloc/bloc/task_bloc.dart';
-import '../../../../product/model/task/task.dart';
 import '../view/task_list_view.dart';
 
 abstract class TaskListViewModel extends State<TaskListView> {

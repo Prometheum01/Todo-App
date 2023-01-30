@@ -6,10 +6,7 @@ import '../view_model/task_list_w_calendar_view_model.dart';
 
 import 'package:todo_app/core/const/padding.dart';
 
-import 'package:todo_app/product/widgets/calendar_day_card.dart';
 import 'package:todo_app/product/widgets/widgets.dart';
-import '../../../../product/widgets/n_back_button.dart';
-import '../../../../product/widgets/n_task_tile_with_row.dart';
 
 class TaskListCalendarView extends StatefulWidget {
   const TaskListCalendarView({super.key});

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/product/widgets/task_time_done_or_circle.dart';
 
 import '../model/task/task.dart';
-import 'n_done_or_circle_icon.dart';
-import 'n_task_card.dart';
+import 'done_or_circle_icon.dart';
+import 'task_card.dart';
 
 class TaskTileWithRow extends StatelessWidget {
   const TaskTileWithRow({

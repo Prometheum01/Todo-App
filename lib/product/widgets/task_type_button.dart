@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/services/bloc/new_task_cubit/cubit/new_task_cubit.dart';
-import 'package:todo_app/product/widgets/n_circle_task_type_icon.dart';
+import 'package:todo_app/product/widgets/circle_task_type_icon.dart';
 
 import '../../core/const/padding.dart';
 import '../model/task_type/task_type.dart';

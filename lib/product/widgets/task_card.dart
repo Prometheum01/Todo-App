@@ -4,7 +4,7 @@ import 'package:kartal/kartal.dart';
 import '../../core/const/decoration.dart';
 import '../../core/const/padding.dart';
 import '../model/task/task.dart';
-import 'n_circle_task_type_icon.dart';
+import 'circle_task_type_icon.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({

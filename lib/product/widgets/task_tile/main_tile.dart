@@ -5,9 +5,9 @@ import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/const/decoration.dart';
 
 import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
-import 'package:todo_app/product/widgets/n_circle_task_type_icon.dart';
-import 'package:todo_app/product/widgets/n_done_or_circle_icon.dart';
-import 'package:todo_app/product/widgets/n_task_card.dart';
+import 'package:todo_app/product/widgets/circle_task_type_icon.dart';
+import 'package:todo_app/product/widgets/done_or_circle_icon.dart';
+import 'package:todo_app/product/widgets/task_card.dart';
 
 import '../../../core/const/padding.dart';
 import '../../../core/const/radius.dart';

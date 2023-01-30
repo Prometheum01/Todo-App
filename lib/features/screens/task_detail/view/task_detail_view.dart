@@ -7,7 +7,6 @@ import 'package:todo_app/core/const/padding.dart';
 import 'package:todo_app/core/const/string.dart';
 import 'package:todo_app/features/screens/task_detail/view_model/task_detail_view_model.dart';
 import 'package:todo_app/product/model/task/task.dart';
-import 'package:todo_app/product/widgets/n_circle_task_type_icon.dart';
 import 'package:todo_app/product/widgets/widgets.dart';
 
 part 'package:todo_app/features/screens/task_detail/components/title.dart';
