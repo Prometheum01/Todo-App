@@ -48,6 +48,10 @@ class MyApp extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.normal,
                   color: Colors.black),
+              displaySmall: GoogleFonts.baloo2().copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black),
               headlineLarge: GoogleFonts.lato().copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w900,
