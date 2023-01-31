@@ -31,9 +31,11 @@ class TaskTime extends Equatable {
     return '$textHour:$textMinute $textIsAm';
   }
 
-  String get format24Hour {
+  String get format24 {
     int hour24 = toTimeOfDay.hour;
-    return hour24 < 10 ? '0$hour24' : hour24.toString();
+    String hourText = hour24 < 10 ? '0$hour24' : hour24.toString();
+    String minuteText = minute < 10 ? '0$minute' : minute.toString();
+    return '$hourText : $minuteText';
   }
 
   TimeOfDay get toTimeOfDay => TimeOfDay(

@@ -22,7 +22,6 @@ class _TaskTitleField extends StatelessWidget {
         TextFormField(
           controller: _controller,
           style: context.textTheme.headlineSmall,
-          onFieldSubmitted: (value) {},
           decoration: InputDecoration(
             hintText: StringConst.titleHint.toCapitalized(),
             hintStyle: context.textTheme.bodyMedium,

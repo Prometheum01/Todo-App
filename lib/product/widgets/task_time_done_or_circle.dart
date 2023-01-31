@@ -15,7 +15,7 @@ class TaskTimeTextDOC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '${time.format24Hour} : ${time.toTimeOfDay.minute}',
+      time.format24,
       textAlign: TextAlign.center,
       style: context.textTheme.headlineSmall?.copyWith(
         color: Colors.black.withOpacity(0.8),

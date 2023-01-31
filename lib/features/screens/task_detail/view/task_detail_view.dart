@@ -55,7 +55,7 @@ class _TaskDetailViewState extends TaskDetailViewModel {
               ),
             ),
             Padding(
-              padding: const PaddingConst.xLargeTop(),
+              padding: const PaddingConst.mediumSymmetricVertical(),
               child: GradientButton(
                 onPressed: () {
                   closePage();

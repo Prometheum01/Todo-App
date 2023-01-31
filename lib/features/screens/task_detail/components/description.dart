@@ -7,12 +7,14 @@ class _Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      description,
-      style: context.textTheme.headlineMedium?.copyWith(
-        color: const Color(ColorConst.descriptionColor),
+    return SingleChildScrollView(
+      child: Text(
+        description,
+        style: context.textTheme.headlineMedium?.copyWith(
+          color: const Color(ColorConst.descriptionColor),
+        ),
+        textAlign: TextAlign.center,
       ),
-      textAlign: TextAlign.center,
     );
   }
 }

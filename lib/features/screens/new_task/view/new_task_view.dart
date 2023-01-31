@@ -40,24 +40,24 @@ class _NewTaskViewState extends NewTaskViewModel {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(flex: 1, child: _Title()),
-              const Flexible(flex: 1, child: _TaskTypeList()),
+              const Flexible(flex: 5, child: _Title()),
+              const Flexible(flex: 11, child: _TaskTypeList()),
               Flexible(
-                flex: 1,
+                flex: 12,
                 child: _TaskTitleField(
                   controller: titleController,
                 ),
               ),
               Flexible(
-                flex: 3,
+                flex: 32,
                 child: _TaskDescriptionField(
                   controller: descriptionController,
                 ),
               ),
-              const Flexible(flex: 1, child: _TaskDateField()),
-              const Flexible(flex: 1, child: _TaskTimeField()),
+              const Flexible(flex: 10, child: _TaskDateField()),
+              const Flexible(flex: 10, child: _TaskTimeField()),
               Flexible(
-                flex: 1,
+                flex: 10,
                 child: Align(
                   alignment: Alignment.bottomLeft,
                   child: GradientButton(

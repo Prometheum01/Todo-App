@@ -49,8 +49,10 @@ class SelectionBorderButton extends StatelessWidget {
                   duration: context.durationLow,
                   opacity: state.selectedTaskList.contains(task) ? 1 : 0,
                   child: Padding(
-                    padding: const PaddingConst.mediumAll(),
-                    child: SvgPicture.asset(ImageConst.doneIconPath),
+                    padding: const PaddingConst.smallAll(),
+                    child: SvgPicture.asset(
+                      ImageConst.doneIconPath,
+                    ),
                   ),
                 );
               }

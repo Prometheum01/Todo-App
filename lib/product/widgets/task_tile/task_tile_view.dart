@@ -32,7 +32,7 @@ class _TaskTileState extends TaskTileViewModel {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.dynamicHeight(0.1),
+      height: context.dynamicHeight(0.11),
       child: Stack(
         children: [
           MainTile(

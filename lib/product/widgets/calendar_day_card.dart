@@ -6,6 +6,8 @@ import '../../core/const/padding.dart';
 import '../../core/const/radius.dart';
 import '../model/task_date/task_date.dart';
 
+const double calendarCardWidthMultiplier = 0.25;
+
 class CalendarDayCard extends StatelessWidget {
   const CalendarDayCard({
     Key? key,
@@ -21,14 +23,11 @@ class CalendarDayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO:Duzenle burayi
-    double cardWidth = context.dynamicWidth(0.2);
-
     return InkWell(
       borderRadius: const RadiusConst.smallAll(),
       onTap: onPressed,
       child: Ink(
-        width: cardWidth,
+        width: context.dynamicWidth(calendarCardWidthMultiplier),
         decoration: BoxDecoration(
           borderRadius: const RadiusConst.smallAll(),
           color: isSelected ? null : Colors.transparent,

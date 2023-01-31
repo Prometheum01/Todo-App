@@ -6,6 +6,7 @@ import 'package:todo_app/core/extension/date_time.dart';
 import 'package:todo_app/core/services/bloc/calendar_cubit/cubit/calendar_cubit.dart';
 import 'package:todo_app/product/model/task_date/task_date.dart';
 
+import '../../../../product/widgets/calendar_day_card.dart';
 import '../view/task_list_w_calendar_view.dart';
 
 abstract class TaskListCalendarViewModel extends State<TaskListCalendarView>
@@ -78,7 +79,8 @@ abstract class TaskListCalendarViewModel extends State<TaskListCalendarView>
   }
 
   listenDays() {
-    double sizeForMid = context.dynamicWidth(0.5 - 0.1) - 8;
+    double sizeForMid =
+        context.dynamicWidth(0.5 - (calendarCardWidthMultiplier / 2)) - 8;
 
     // ignore: no_leading_underscores_for_local_identifiers
     int _initialMonthIndex =
@@ -141,11 +143,13 @@ abstract class TaskListCalendarViewModel extends State<TaskListCalendarView>
 
   animateListViewToCurrentDate(int selectedIndex) {
     // ignore: no_leading_underscores_for_local_identifiers
-    double allBoxSize = (context.dynamicWidth(0.2) * (selectedIndex));
+    double allBoxSize =
+        (context.dynamicWidth(calendarCardWidthMultiplier) * (selectedIndex));
 
     double allPaddingSize = 8.0 * (selectedIndex);
 
-    double sizeForMid = context.dynamicWidth(0.5 - 0.1) - 8;
+    double sizeForMid =
+        context.dynamicWidth(0.5 - (calendarCardWidthMultiplier / 2)) - 8;
 
     controller.animateTo(
       allBoxSize + allPaddingSize - sizeForMid,

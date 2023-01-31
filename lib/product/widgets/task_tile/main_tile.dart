@@ -29,6 +29,7 @@ class MainTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      fit: StackFit.expand,
       children: [
         InkWell(
           onTap: () {
@@ -49,20 +50,20 @@ class MainTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: CircleTaskTypeIcon(taskType: task.taskType),
                   ),
                   Expanded(
-                    flex: 7,
+                    flex: 15,
                     child: TaskCardTitle(text: task.title),
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 3,
                     child: isSelectionMode
                         ? SelectionBorderButton(task: task)
                         : _DateTime(
                             date: task.date.formatDate,
-                            time: task.time.formatTime,
+                            time: task.time.format24,
                           ),
                   )
                 ],
@@ -71,12 +72,14 @@ class MainTile extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const PaddingConst.xSmallSymmetricHorizontal() +
-              const PaddingConst.smallSymmetricVertical(),
-          child: DoneOrCircleIcon(
-            isDone: isDonePage,
-            color: Color(
-              task.taskType.colorList.first,
+          padding: const PaddingConst.smallAll(),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: DoneOrCircleIcon(
+              isDone: isDonePage,
+              color: Color(
+                task.taskType.colorList.first,
+              ),
             ),
           ),
         ),
