@@ -54,15 +54,18 @@ class _TaskListCalendarViewState extends TaskListCalendarViewModel {
                         separatorBuilder: (context, index) => const Padding(
                           padding: PaddingConst.xSmallSymmetricHorizontal(),
                         ),
-                        itemBuilder: (context, index) => CalendarDayCard(
-                          onPressed: () {
-                            if (state.selectedIndex != index) {
-                              tapCalendarCard(state.taskDateList[index], index);
-                            }
-                          },
-                          isSelected: state.selectedIndex == index,
-                          taskDate: state.taskDateList[index],
-                        ),
+                        itemBuilder: (context, index) {
+                          return CalendarDayCard(
+                            onPressed: () {
+                              if (state.selectedIndex != index) {
+                                tapCalendarCard(
+                                    state.taskDateList[index], index);
+                              }
+                            },
+                            isSelected: state.selectedIndex == index,
+                            taskDate: state.taskDateList[index],
+                          );
+                        },
                       ),
                     ),
                     Flexible(

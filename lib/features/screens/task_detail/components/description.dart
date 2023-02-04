@@ -10,9 +10,8 @@ class _Description extends StatelessWidget {
     return SingleChildScrollView(
       child: Text(
         description,
-        style: context.textTheme.headlineMedium?.copyWith(
-          color: const Color(ColorConst.descriptionColor),
-        ),
+        style: context.textTheme.headlineMedium
+            ?.copyWith(color: context.read<ThemeProvider>().detailDescription),
         textAlign: TextAlign.center,
       ),
     );

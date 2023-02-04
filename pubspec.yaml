@@ -26,6 +26,7 @@ dependencies:
   #State Management
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
+  provider: ^6.0.5
 
   #Image
   flutter_svg: ^1.1.6

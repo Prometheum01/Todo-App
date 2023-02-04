@@ -16,7 +16,6 @@ import '../../../../core/services/bloc/task_bloc/bloc/task_bloc.dart';
 import '../../../../product/widgets/circle_button_row.dart';
 import '../../../../product/widgets/custom_background.dart';
 import '../../../../product/widgets/gradient_icon_button.dart';
-import '../../../../product/widgets/task_tile/main_tile.dart';
 import '../../../../product/widgets/task_tile/task_tile_view.dart';
 
 class DoneTaskView extends StatefulWidget {
@@ -81,10 +80,10 @@ class _DoneTaskViewState extends DoneTaskViewModel {
                       itemCount: list.length,
                       itemBuilder: (context, index) => Padding(
                         padding: const PaddingConst.smallSymmetricVertical(),
-                        child: MainTile(
+                        child: TaskTile(
                           task: list[index],
+                          isIncludeDoneButton: false,
                           isSelectionMode: true,
-                          isDonePage: true,
                         ),
                       ),
                     ),

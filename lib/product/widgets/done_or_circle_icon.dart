@@ -18,7 +18,7 @@ class DoneOrCircleIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       isDone ? ImageConst.doneTickIconPath : ImageConst.circleIconPath,
-      color: color,
+      color: color?.withOpacity(0.8),
     );
   }
 }

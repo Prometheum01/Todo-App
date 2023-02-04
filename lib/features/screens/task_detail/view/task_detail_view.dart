@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
-import 'package:todo_app/core/const/color.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/const/decoration.dart';
 import 'package:todo_app/core/const/padding.dart';
 
@@ -8,6 +8,8 @@ import 'package:todo_app/core/const/string.dart';
 import 'package:todo_app/features/screens/task_detail/view_model/task_detail_view_model.dart';
 import 'package:todo_app/product/model/task/task.dart';
 import 'package:todo_app/product/widgets/widgets.dart';
+
+import '../../../../core/services/provider/theme_provider.dart';
 
 part 'package:todo_app/features/screens/task_detail/components/title.dart';
 part 'package:todo_app/features/screens/task_detail/components/date_time.dart';
@@ -27,7 +29,10 @@ class _TaskDetailViewState extends TaskDetailViewModel {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecorationConst.whiteRounded(),
+      decoration: BoxDecorationConst.whiteRounded(
+        context.watch<ThemeProvider>().cardColor,
+        context.watch<ThemeProvider>().cardShadowColor,
+      ),
       child: Padding(
         padding: const PaddingConst.mediumAll(),
         child: Column(

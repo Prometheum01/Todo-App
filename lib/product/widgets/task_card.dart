@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
+import 'package:todo_app/core/services/provider/theme_provider.dart';
 
 import '../../core/const/decoration.dart';
 import '../../core/const/padding.dart';
@@ -17,7 +19,10 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecorationConst.whiteRounded(),
+      decoration: BoxDecorationConst.whiteRounded(
+        context.watch<ThemeProvider>().cardColor,
+        context.watch<ThemeProvider>().cardShadowColor,
+      ),
       child: Padding(
         padding: const PaddingConst.mediumAll(),
         child: Row(

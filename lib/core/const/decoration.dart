@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/core/const/radius.dart';
 
 class BoxDecorationConst extends BoxDecoration {
-  BoxDecorationConst.whiteRounded()
+  BoxDecorationConst.whiteRounded(Color color, shadowColor)
       : super(
-          color: Colors.white,
+          color: color,
           borderRadius: const RadiusConst.smallAll(),
           boxShadow: [
             BoxShadow(
@@ -14,10 +14,10 @@ class BoxDecorationConst extends BoxDecoration {
             ),
           ],
         );
-  BoxDecorationConst.whiteRoundedWShadow()
+  BoxDecorationConst.whiteRoundedWShadow(Color color)
       : super(
           borderRadius: const RadiusConst.smallAll(),
-          color: Colors.white.withOpacity(0.9),
+          color: color,
           boxShadow: [
             BoxShadow(
               blurRadius: 6,

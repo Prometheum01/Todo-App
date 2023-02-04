@@ -5,6 +5,7 @@ import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/const/decoration.dart';
 
 import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
+import 'package:todo_app/core/services/provider/theme_provider.dart';
 import 'package:todo_app/product/widgets/circle_task_type_icon.dart';
 import 'package:todo_app/product/widgets/done_or_circle_icon.dart';
 import 'package:todo_app/product/widgets/task_card.dart';
@@ -42,7 +43,9 @@ class MainTile extends StatelessWidget {
           borderRadius: const RadiusConst.smallAll(),
           splashColor: Color(task.taskType.colorList.first).withOpacity(0.18),
           child: Ink(
-            decoration: BoxDecorationConst.whiteRoundedWShadow(),
+            decoration: BoxDecorationConst.whiteRoundedWShadow(
+              context.watch<ThemeProvider>().tileColor,
+            ),
             child: Padding(
               padding: const PaddingConst.mediumAll(),
               child: Row(

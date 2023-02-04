@@ -9,6 +9,7 @@ import 'package:todo_app/core/const/padding.dart';
 import 'package:todo_app/core/const/string.dart';
 import 'package:todo_app/core/extension/list_extension.dart';
 import 'package:todo_app/core/services/bloc/task_bloc/bloc/task_bloc.dart';
+import 'package:todo_app/core/services/provider/theme_provider.dart';
 import 'package:todo_app/features/screens/new_task/view/new_task_view.dart';
 import 'package:todo_app/product/model/task/task.dart';
 
@@ -172,7 +173,15 @@ class _TaskListViewState extends TaskListViewModel {
           icon: SvgPicture.asset(
             ImageConst.doneTaskListIconPath,
           ),
-        )
+        ),
+        IconButton(
+          onPressed: () {
+            context.read<ThemeProvider>().changeTheme();
+          },
+          icon: SvgPicture.asset(
+            ImageConst.cancelIconPath,
+          ),
+        ),
       ],
     );
   }

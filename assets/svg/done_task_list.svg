@@ -10,8 +10,8 @@
   </defs>
   <g id="Group_13" data-name="Group 13" transform="translate(-316 -18)">
     <g id="Component_3_1" data-name="Component 3 – 1" transform="translate(316 18)" clip-path="url(#clip-path)">
-      <rect id="Rectangle_2" data-name="Rectangle 2" width="14" height="5" rx="2.5" transform="translate(9)" opacity="0.7" fill="url(#linear-gradient)"/>
-      <rect id="Rectangle_3" data-name="Rectangle 3" width="23" height="5" rx="2.5" transform="translate(0 10)" opacity="0.7" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="14" height="5" rx="2.5" transform="translate(9)" opacity="1" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3" data-name="Rectangle 3" width="23" height="5" rx="2.5" transform="translate(0 10)" opacity="1" fill="url(#linear-gradient)"/>
     </g>
   </g>
 </svg>

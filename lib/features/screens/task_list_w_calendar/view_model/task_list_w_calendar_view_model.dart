@@ -95,9 +95,13 @@ abstract class TaskListCalendarViewModel extends State<TaskListCalendarView>
 
       int bigDayCount = monthsDayCount[_selectedMonthIndex];
 
-      int smallDayCount = monthsDayCount[_selectedMonthIndex > 0
-          ? _selectedMonthIndex - 1
-          : _selectedMonthIndex];
+      int smallDayCount = 0;
+
+      if (_initialMonthIndex != _selectedMonthIndex) {
+        smallDayCount = monthsDayCount[_selectedMonthIndex > 0
+            ? _selectedMonthIndex - 1
+            : _selectedMonthIndex];
+      }
 
       for (int i = _initialMonthIndex;
           i <
@@ -115,28 +119,36 @@ abstract class TaskListCalendarViewModel extends State<TaskListCalendarView>
             : 0;
       }
 
-      double smallBorderOffset = (smallDayCount * context.dynamicWidth(0.2)) +
-          (8 * (smallDayCount - 1)) -
-          sizeForMid;
+      double smallBorderOffset =
+          (smallDayCount * context.dynamicWidth(calendarCardWidthMultiplier)) +
+              (8 * (smallDayCount - 1)) -
+              sizeForMid;
 
-      double bigBorderOffset = (bigDayCount * context.dynamicWidth(0.2)) +
-          (8 * (bigDayCount - 1)) -
-          sizeForMid;
+      double bigBorderOffset =
+          (bigDayCount * context.dynamicWidth(calendarCardWidthMultiplier)) +
+              (8 * (bigDayCount - 1)) -
+              sizeForMid;
 
       if (controller.offset >= bigBorderOffset) {
         List<TaskDate> taskDateList =
             (context.read<CalendarCubit>().state as CalendarCreated)
                 .taskDateList;
+
+        int index = (taskDateList.length < bigDayCount + 1)
+            ? bigDayCount - 1
+            : bigDayCount + 1;
         context.read<CalendarCubit>().changeMonthAndYear(
-            selectedMonthIndex: taskDateList[bigDayCount + 1].month - 1,
-            selectedYear: taskDateList[bigDayCount + 1].year);
+            selectedMonthIndex: taskDateList[index].month - 1,
+            selectedYear: taskDateList[index].year);
       } else if (controller.offset <= smallBorderOffset) {
         List<TaskDate> taskDateList =
             (context.read<CalendarCubit>().state as CalendarCreated)
                 .taskDateList;
+        int index =
+            (0 > smallDayCount - 1) ? smallDayCount + 1 : smallDayCount - 1;
         context.read<CalendarCubit>().changeMonthAndYear(
-            selectedMonthIndex: taskDateList[smallDayCount - 2].month - 1,
-            selectedYear: taskDateList[smallDayCount - 2].year);
+            selectedMonthIndex: taskDateList[index].month - 1,
+            selectedYear: taskDateList[index].year);
       }
     });
   }

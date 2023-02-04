@@ -14,8 +14,6 @@ class TaskHive {
   TaskHive({this.dbKey = waitingTaskDbKey});
 
   Future<void> initDB() async {
-    await Hive.initFlutter();
-
     Hive.registerAdapter(TaskAdapter());
     Hive.registerAdapter(TaskDateAdapter());
     Hive.registerAdapter(TaskTimeAdapter());

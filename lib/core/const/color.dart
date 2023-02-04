@@ -12,4 +12,7 @@ class ColorConst {
 
   static const int background = 0xFFCAEBFE;
   static const int descriptionColor = 0xFF95989A;
+
+  static const int backgroundDark = 0xFF6E6E6E;
+  static const int containerBackground = 0xFF2E2E2E;
 }

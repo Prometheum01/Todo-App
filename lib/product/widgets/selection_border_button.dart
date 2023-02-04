@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kartal/kartal.dart';
+import 'package:todo_app/core/services/provider/theme_provider.dart';
 import 'package:todo_app/product/widgets/error_animation.dart';
 
 import '../../core/const/color.dart';
@@ -31,7 +32,7 @@ class SelectionBorderButton extends StatelessWidget {
         child: Ink(
           decoration: BoxDecoration(
             borderRadius: const RadiusConst.smallAll(),
-            color: Colors.white,
+            color: context.watch<ThemeProvider>().selectionButtonBackground,
             border: Border.all(
               color: const Color(ColorConst.palatinateBlue).withOpacity(0.2),
             ),
@@ -52,6 +53,9 @@ class SelectionBorderButton extends StatelessWidget {
                     padding: const PaddingConst.smallAll(),
                     child: SvgPicture.asset(
                       ImageConst.doneIconPath,
+                      color: Color(
+                        task.taskType.colorList.first,
+                      ),
                     ),
                   ),
                 );

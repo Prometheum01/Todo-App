@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
+import 'package:todo_app/core/services/provider/theme_provider.dart';
 
 import '../../core/const/color.dart';
 import '../../core/const/padding.dart';
@@ -71,13 +73,19 @@ class _DayUnderText extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(
         text: taskDate.day.toString(),
-        style: context.textTheme.displaySmall
-            ?.copyWith(color: isSelected ? Colors.white : Colors.black),
+        style: context.textTheme.displaySmall?.copyWith(
+          color: context.watch<ThemeProvider>().isLight
+              ? (isSelected ? Colors.white : Colors.black)
+              : (isSelected ? Colors.black : Colors.white),
+        ),
         children: [
           TextSpan(
             text: '\n${taskDate.textDay}',
-            style: context.textTheme.displaySmall
-                ?.copyWith(color: isSelected ? Colors.white : Colors.black),
+            style: context.textTheme.displaySmall?.copyWith(
+              color: context.watch<ThemeProvider>().isLight
+                  ? (isSelected ? Colors.white : Colors.black)
+                  : (isSelected ? Colors.black : Colors.white),
+            ),
           ),
         ],
       ),

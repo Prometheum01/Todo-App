@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:todo_app/core/const/padding.dart';
+import 'package:todo_app/core/services/provider/theme_provider.dart';
 import 'package:todo_app/features/screens/task_detail/view/task_detail_view.dart';
 import 'package:todo_app/product/widgets/task_tile/task_tile_view.dart';
 
@@ -30,6 +31,7 @@ abstract class TaskTileViewModel extends State<TaskTile> {
   openDetailSheet() {
     showDialog(
       context: context,
+      barrierColor: context.read<ThemeProvider>().dialogBarrier,
       builder: (context) => Center(
         child: SizedBox(
           height: context.dynamicHeight(0.6),
